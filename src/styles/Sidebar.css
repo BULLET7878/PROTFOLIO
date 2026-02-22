@@ -1,140 +1,231 @@
-.menu {
+/* Sidebar.css */
+
+.NavigationMenu {
   position: fixed;
-  right: 24px;
+  right: 30px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  width: auto;
-  height: auto;
+  z-index: 100;
+  display: none;
 }
 
-.items {
+@media (min-width: 1024px) {
+  .NavigationMenu {
+    display: block;
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 1023px) {
+  .NavigationMenu {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: var(--sidebar-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: right var(--transition-speed) ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .NavigationMenu.MobileOpen {
+    right: 0;
+    display: flex;
+  }
+
+  .NavLabel {
+    position: relative !important;
+    right: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: transparent !important;
+    color: var(--text-main) !important;
+    padding: 0 !important;
+    margin-left: 15px;
+    height: auto !important;
+  }
+
+  .NavButton {
+    width: auto !important;
+    height: 60px !important;
+    border-radius: 8px !important;
+    padding: 0 20px !important;
+    justify-content: flex-start !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .NavButton.ActivePage {
+    color: #00a2ff !important;
+  }
+
+  .NavItemsList {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+.NavItemsList {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 16px;
-  padding: 0;
-  width: auto;
+  gap: 20px;
 }
 
-.item {
+.NavItemWrapper {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: auto;
 }
 
-.menu .btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
+.NavButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: #1a1a1a;
-  border: none;
-  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background-color: var(--sidebar-bg);
+  border-radius: 50%;
+  color: var(--text-main);
+  transition: all var(--transition-speed) ease;
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  padding: 0;
-  gap: 0;
-  overflow: hidden;
-  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: var(--shadow);
 }
 
-.menu .btn:hover,
-.menu .btn.hover {
-  width: auto;
-  min-width: 48px;
-  padding: 0 16px 0 12px;
-  justify-content: flex-start;
-  gap: 12px;
-  transform: translateX(-8px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+.NavButton.ActivePage {
+  background-color: #00a2ff;
 }
 
-.menu .btn.active {
-  background: #6B5CF6;
-  box-shadow: 0 4px 16px rgba(107, 92, 246, 0.4);
+.NavButton.IsHovered {
+  background-color: #00a2ff;
 }
 
-.menu .btn.active:hover,
-.menu .btn.active.hover {
-  box-shadow: 0 6px 20px rgba(107, 92, 246, 0.5);
+.NavIcon {
+  font-size: 1.25rem;
+  z-index: 2;
 }
 
-.icon {
-  font-size: 20px;
-  color: #ffffff;
-  stroke-width: 2;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-  min-width: 20px;
-}
-
-.menu .btn:hover .icon,
-.menu .btn.hover .icon {
-  color: #f5f5f5;
-}
-
-.menu .btn.active .icon {
-  color: #ffffff;
-}
-
-.text {
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
+.NavLabel {
+  position: absolute;
+  right: 0;
+  background-color: #00a2ff;
+  color: white;
+  padding: 0 25px 0 30px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 30px 0 0 30px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 15px;
   opacity: 0;
-  width: 0;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+  transition: all var(--transition-speed) ease;
+  z-index: 1;
   white-space: nowrap;
-  display: inline-block;
 }
 
-.menu .btn:hover .text,
-.menu .btn.hover .text {
+.NavButton.IsHovered .NavLabel {
+  right: 25px;
   opacity: 1;
-  width: auto;
-  margin-left: 0;
+  visibility: visible;
 }
 
-@media (max-width: 768px) {
-  .menu {
-    right: 16px;
-  }
+/* Mobile Toggle Button */
+.MobileToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background-color: var(--sidebar-bg);
+  border: 1px solid var(--border-color);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
 
-  .menu .btn {
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    gap: 0;
+@media (min-width: 1024px) {
+  .MobileToggle {
+    display: none;
   }
+}
 
-  .menu .btn:hover,
-  .menu .btn.hover {
-    padding: 0 14px 0 10px;
-    gap: 10px;
-  }
+.HamburgerIcon {
+  width: 24px;
+  height: 18px;
+  position: relative;
+}
 
-  .icon {
-    font-size: 18px;
-    min-width: 18px;
-  }
+.HamburgerIcon span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: var(--text-main);
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
 
-  .text {
-    font-size: 13px;
-  }
+.HamburgerIcon span:nth-child(1) {
+  top: 0px;
+}
 
-  .items {
-    gap: 12px;
-  }
+.HamburgerIcon span:nth-child(2) {
+  top: 8px;
+}
+
+.HamburgerIcon span:nth-child(3) {
+  top: 16px;
+}
+
+.MobileToggle.IsActive .HamburgerIcon span:nth-child(1) {
+  top: 8px;
+  transform: rotate(135deg);
+}
+
+.MobileToggle.IsActive .HamburgerIcon span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.MobileToggle.IsActive .HamburgerIcon span:nth-child(3) {
+  top: 8px;
+  transform: rotate(-135deg);
+}
+
+.NavOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-speed) ease;
+}
+
+.NavOverlay.IsVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 1023px) {
+  /* Mobile Menu Styles if needed, or stick to the fixed bottom bar if you have one */
+  /* This layout is primarily designed for the side desktop nav */
 }

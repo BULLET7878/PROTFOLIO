@@ -1,184 +1,233 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { FiDownload } from 'react-icons/fi';
+import React, { useState, useEffect } from 'react';
+import { FaDownload, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { skills as skillsData } from '../data/skills';
 import '../styles/About.css';
 
-const About = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
+const CircularProgress = ({ percentage, label }) => {
+  const [offset, setOffset] = useState(282.7);
+  const circleRef = React.useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setOffset(282.7 - (282.7 * percentage) / 100);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.5 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (circleRef.current) {
+      observer.observe(circleRef.current);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (circleRef.current) {
+        observer.unobserve(circleRef.current);
       }
     };
-  }, []);
+  }, [percentage]);
 
+  return (
+    <div className="SkillProgressBlock">
+      <div className="CircularWrapper" ref={circleRef}>
+        <svg className="CircularSvg" viewBox="0 0 100 100">
+          <circle
+            cx="50"
+            cy="50"
+            r="45"
+            className="CirlceTrack"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="45"
+            strokeDasharray="282.7"
+            strokeDashoffset={offset}
+            className="CircleFill"
+          />
+        </svg>
+        <span className="ProgressPercent">
+          {percentage}%
+        </span>
+      </div>
+      <span className="SkillLabel">
+        {label}
+      </span>
+    </div>
+  );
+};
+
+const About = () => {
   const handleDownloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/Resume-Rahul%20Dhakad%20(7).pdf';
-    link.download = 'Resume-Rahul_Dhakad.pdf';
+    link.href = '/resume.pdf';
+    link.download = 'Rahul_Dhakad_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
-  const skills = [
-    { name: 'React', level: 95 },
-    { name: 'JavaScript', level: 98 },
-    { name: 'Node.js', level: 90 },
-    { name: 'HTML5', level: 95 },
-    { name: 'CSS3', level: 92 },
-    { name: 'Python', level: 80 },
-    { name: 'MongoDB', level: 75 },
-    { name: 'MySQL', level: 85 },
-    { name: 'Express.js', level: 85 }
+  const personalInfos = [
+    { label: 'Name', value: 'Rahul Dhakad' },
+    { label: 'Age', value: '22 Years' },
+    { label: 'Freelance', value: 'Available', isGreen: true },
+    { label: 'Address', value: 'Kota, Rajasthan' },
+    { label: 'Phone', value: '+91 90248 50689' },
+    { label: 'Email', value: 'rahuldhakarmm@gmail.com' },
+    { label: 'Languages', value: 'Hindi, English' },
   ];
 
-  const education = [
-    {
-      degree: 'Bachelor of Science in Computer Science',
-      institution: 'University Name',
-      year: '2018 - 2022',
-      description: 'Specialized in Software Engineering and Web Development'
-    },
-    {
-      degree: 'Full Stack Web Development',
-      institution: 'Online Course',
-      year: '2020',
-      description: 'Completed comprehensive full-stack development program'
-    }
+  const stats = [
+    { number: '2+', text: 'YEARS OF\nEXPERIENCE' },
+    { number: '7+', text: 'COMPLETED\nPROJECTS' }
   ];
 
   return (
-    <section id="about" className="about-section" ref={sectionRef}>
-      <div className="container">
-        <h2 className={`section-title ${isVisible ? 'fade-in' : ''}`}>About Me</h2>
-        
-        {/* Download CV Button */}
-        <div className={`cv-download ${isVisible ? 'fade-in' : ''}`}>
-          <button onClick={handleDownloadCV} className="download-btn">
-            <FiDownload className="download-icon" />
-            <span>Download CV</span>
-          </button>
+    <section className="AboutPage">
+      <div className="AboutContainer">
+
+        {/* Title Section */}
+        <div className="SectionTitleBox">
+          <h2 className="FaintTitle">
+            RESUME
+          </h2>
+          <h1 className="BoldTitle">
+            ABOUT <span className="BlueAccent">ME</span>
+          </h1>
         </div>
 
-        <div className={`about-content ${isVisible ? 'fade-in' : ''}`}>
-          {/* About Me Section */}
-          <div className="about-card">
-            <h3 className="card-title">About Me</h3>
-            <div className="about-text">
-              <p>
-                I am <strong>RAHUL DHAKAD</strong>, a Full Stack Developer skilled in building web and mobile applications using{' '}
-                <span className="tech-highlight react">React</span>,{' '}
-                <span className="tech-highlight react-native">React Native</span>,{' '}
-                <span className="tech-highlight nodejs">Node.js</span>, and{' '}
-                <span className="tech-highlight express">Express</span>. I work with databases like{' '}
-                <span className="tech-highlight mongodb">MongoDB</span> and{' '}
-                <span className="tech-highlight mysql">MySQL</span> to create scalable and efficient solutions.
+        {/* Content Wrapper */}
+        <div className="AboutGrid">
+          {/* Top Content: Personal Infos & Stats */}
+          <div className="IntroStatsLayout">
+
+            {/* Left: Personal Infos */}
+            <div className="PersonalInfoCol">
+              <h3 className="ColHeading">
+                PERSONAL INFOS
+              </h3>
+
+              <p className="ColBio">
+                I'm a passionate Full Stack Developer specializing in the MERN stack. I focus on building clean, high-performance web applications and am always eager to learn and implement innovative solutions.
               </p>
-              <p>
-                I have experience integrating <span className="tech-highlight api">APIs</span>,{' '}
-                <span className="tech-highlight auth">authentication systems</span>, and{' '}
-                <span className="tech-highlight cloud">cloud services</span>, focusing on clean code and seamless user experiences.
-              </p>
-              <p>
-                Passionate about solving problems and delivering end-to-end functional applications, I continuously learn new technologies to stay ahead in the tech world.
-              </p>
+
+              <div className="InfoDetailsGrid">
+                {personalInfos.map((info, idx) => (
+                  <div key={idx} className="InfoItem">
+                    <span className="InfoLabel">{info.label} :</span>
+                    <span className={`InfoValue ${info.isGreen ? 'TextGreen' : ''}`}>
+                      {info.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Stats Grid */}
+            <div className="StatsCol">
+              <div className="StatsGrid">
+                {stats.map((stat, idx) => (
+                  <div key={idx} className="StatCard">
+                    <h3 className="StatNumber">
+                      {stat.number.replace('+', '')}
+                      <span className="StatPlus">+</span>
+                    </h3>
+                    <p className="StatText">
+                      <span className="StatLine"></span>
+                      {stat.text.split('\n').map((line, i) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          {i === 0 && <br />}
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Skills Section */}
-          <div className="about-card">
-            <h3 className="card-title">Skills</h3>
-            <svg width="0" height="0" style={{ position: 'absolute' }}>
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#6B5CF6" />
-                  <stop offset="100%" stopColor="#8B7CF6" />
-                </linearGradient>
-              </defs>
-            </svg>
-            <div className="skills-circular-grid">
-              {skills.map((skill, index) => (
-                <div key={index} className="circular-skill-item">
-                  <div className="circular-progress-wrapper">
-                    <svg className="circular-progress" viewBox="0 0 120 120">
-                      <circle
-                        className="progress-bg"
-                        cx="60"
-                        cy="60"
-                        r="50"
-                        fill="none"
-                        strokeWidth="8"
-                      />
-                      <circle
-                        className="progress-fill"
-                        cx="60"
-                        cy="60"
-                        r="50"
-                        fill="none"
-                        strokeWidth="8"
-                        strokeDasharray={`${2 * Math.PI * 50}`}
-                        strokeDashoffset={`${2 * Math.PI * 50 * (1 - skill.level / 100)}`}
-                        style={{ transition: 'stroke-dashoffset 1s ease' }}
-                      />
-                    </svg>
-                    <div className="circular-percent">
-                      <span className="percent-value">{skill.level}%</span>
-                    </div>
-                  </div>
-                  <div className="circular-skill-name">{skill.name}</div>
-                </div>
+          {/* Separator */}
+          <div className="PageSeparator"></div>
+
+          {/* My Skills */}
+          <div className="SkillsArea">
+            <h3 className="ColHeading CenterText">
+              MY SKILLS
+            </h3>
+            <div className="SkillsGrid">
+              {skillsData.map((skill) => (
+                <CircularProgress key={skill.id} label={skill.name} percentage={skill.level} />
               ))}
             </div>
           </div>
 
-          {/* Education Section */}
-          <div className="about-card">
-            <h3 className="card-title">Education</h3>
-            <div className="education-list">
-              {education.map((edu, index) => (
-                <div key={index} className="education-item">
-                  <div className="edu-year">{edu.year}</div>
-                  <div className="edu-content">
-                    <h4 className="edu-degree">{edu.degree}</h4>
-                    <p className="edu-institution">{edu.institution}</p>
-                    <p className="edu-description">{edu.description}</p>
+          {/* Separator */}
+          <div className="PageSeparator"></div>
+
+          {/* Experience & Education */}
+          <div className="TimelineArea">
+            <h3 className="ColHeading CenterText">
+              EXPERIENCE & EDUCATION
+            </h3>
+
+            <div className="TimelineGrid">
+              {/* College */}
+              <div className="TimelineItem">
+                <div className="TimelineContent">
+                  <div className="TimelineIconBox">
+                    <FaGraduationCap className="TimelineIcon" />
                   </div>
+                  <span className="TimelineBadge">
+                    2024 - PRESENT
+                  </span>
+                  <h4 className="EntryTitle">
+                    Bachelor of Technology <span className="EntryInstitution">- NEWTON SCHOOL OF TECHNOLOGY</span>
+                  </h4>
+                  <p className="EntryBio">
+                    Pursuing B.Tech with a focus on cutting-edge technologies and industry-ready skills.
+                  </p>
                 </div>
-              ))}
+              </div>
+
+              {/* School */}
+              <div className="TimelineItem">
+                <div className="TimelineContent">
+                  <div className="TimelineIconBox">
+                    <FaGraduationCap className="TimelineIcon" />
+                  </div>
+                  <span className="TimelineBadge">
+                    2020 - 2022
+                  </span>
+                  <h4 className="EntryTitle">
+                    10th & 12th Education <span className="EntryInstitution">- JAWAHAR NAVODAYA VIDYALAYA KOTA</span>
+                  </h4>
+                  <p className="EntryBio">
+                    Completed secondary and higher secondary education with a focus on science and mathematics.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="about-stats">
-            <div className="stat-item">
-              <h3>7+</h3>
-              <p>Projects Completed</p>
-            </div>
-            <div className="stat-item">
-              <h3>2+</h3>
-              <p>Years Experience</p>
-            </div>
-            <div className="stat-item">
-              <h3>100%</h3>
-              <p>Client Satisfaction</p>
-            </div>
+          {/* Download CV Button at Bottom */}
+          <div className="DownloadWrapper CenterBtn">
+            <button
+              onClick={handleDownloadCV}
+              className="DownloadButton group"
+            >
+              <div className="DownloadBtnBg"></div>
+              <span className="DownloadBtnText">
+                DOWNLOAD CV
+              </span>
+              <div className="DownloadBtnIconBox">
+                <FaDownload className="DownloadIcon" />
+              </div>
+            </button>
           </div>
+
         </div>
       </div>
     </section>

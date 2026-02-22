@@ -3,15 +3,24 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import About from './components/About';
-import Skills from './components/Skills';
 import Projects from './components/Projects';
-import Certifications from './components/Certifications';
 import Contact from './components/Contact';
+import ThemeToggle from './components/ThemeToggle';
 import './index.css';
 
 function AppContent() {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const location = useLocation();
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   useEffect(() => {
     setIsTransitioning(true);
@@ -22,16 +31,15 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <div className="app">
+    <div className="PortfolioRoot">
       <Sidebar />
-      {isTransitioning && <div className="page-transition"></div>}
-      <main className="main-content">
+      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      {isTransitioning && <div className="SceneTransition"></div>}
+      <main className="MainViewport">
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/certifications" element={<Certifications />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>

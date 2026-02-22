@@ -2,7 +2,7 @@ export const skills = [
   {
     id: 1,
     name: 'React',
-    level: 90,
+    level: 95,
     category: 'Frontend',
     icon: '⚛️'
   },
@@ -15,73 +15,65 @@ export const skills = [
   },
   {
     id: 3,
-    name: 'Node.js',
+    name: 'TypeScript',
     level: 85,
-    category: 'Backend',
-    icon: '🟢'
+    category: 'Frontend',
+    icon: '📘'
   },
   {
     id: 4,
-    name: 'Python',
-    level: 80,
-    category: 'Backend',
-    icon: '🐍'
-  },
-  {
-    id: 5,
     name: 'HTML/CSS',
     level: 95,
     category: 'Frontend',
     icon: '🎨'
   },
   {
-    id: 6,
-    name: 'MongoDB',
-    level: 75,
-    category: 'Database',
-    icon: '🍃'
+    id: 5,
+    name: 'Node.js',
+    level: 90,
+    category: 'Backend',
+    icon: '🟢'
   },
   {
-    id: 7,
+    id: 6,
     name: 'Express.js',
     level: 85,
     category: 'Backend',
     icon: '🚂'
   },
   {
+    id: 7,
+    name: 'Python',
+    level: 80,
+    category: 'Backend',
+    icon: '🐍'
+  },
+  {
     id: 8,
+    name: 'MySQL',
+    level: 90,
+    category: 'Database',
+    icon: '📊'
+  },
+  {
+    id: 9,
+    name: 'MongoDB',
+    level: 85,
+    category: 'Database',
+    icon: '🍃'
+  },
+  {
+    id: 10,
     name: 'Git',
     level: 90,
     category: 'Tools',
     icon: '📦'
   },
   {
-    id: 9,
-    name: 'TypeScript',
-    level: 75,
-    category: 'Frontend',
-    icon: '📘'
-  },
-  {
-    id: 10,
-    name: 'Redux',
-    level: 80,
-    category: 'Frontend',
-    icon: '🔄'
-  },
-  {
     id: 11,
-    name: 'Firebase',
-    level: 70,
-    category: 'Backend',
-    icon: '🔥'
-  },
-  {
-    id: 12,
     name: 'AWS',
-    level: 65,
+    level: 70,
     category: 'Cloud',
     icon: '☁️'
   }
 ];
-

@@ -10,6 +10,7 @@ export default {
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
         'poppins': ['Poppins', 'sans-serif'],
+        'opensans': ['Open Sans', 'sans-serif'],
       },
       colors: {
         'tunis-yellow': '#ffd700',

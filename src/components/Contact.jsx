@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { socialLinks } from '../data/social';
-import { FiGithub, FiLinkedin, FiInstagram, FiMail } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaEnvelopeOpen, FaPhoneSquareAlt, FaPaperPlane, FaMap, FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa';
 import '../styles/Contact.css';
 
 const Contact = () => {
@@ -11,30 +10,6 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -43,132 +18,223 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const [status, setStatus] = useState(null); // 'success', 'validation-error', 'submission-error'
 
-    // Simulate form submission
-    setTimeout(() => {
-      alert('Thank you for your message! I will get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setIsSubmitting(false);
-    }, 1000);
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
   };
 
-  const getIcon = (iconName) => {
-    const icons = {
-      github: FiGithub,
-      linkedin: FiLinkedin,
-      whatsapp: FaWhatsapp,
-      instagram: FiInstagram,
-      email: FiMail
-    };
-    return icons[iconName] || FiGithub;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateEmail(formData.email)) {
+      setStatus('validation-error');
+      return;
+    }
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/rahuldhakarmm@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: formData.subject,
+          message: formData.message,
+          _template: 'table'
+        }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus('submission-error');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('submission-error');
+    }
+
+    setTimeout(() => {
+      if (status !== 'in-progress') setStatus(null);
+    }, 5000);
   };
 
   return (
-    <section id="contact" className="contact-section" ref={sectionRef}>
-      <div className="container">
-        <h2 className={`section-title ${isVisible ? 'fade-in' : ''}`}>Contact Me</h2>
-        <div className={`contact-content ${isVisible ? 'fade-in' : ''}`}>
-          <div className="contact-info">
-            <h3>Let's Work Together</h3>
-            <p>
-              I'm always open to discussing new projects, creative ideas, or
-              opportunities to be part of your visions.
-            </p>
-            <div className="contact-details">
-              <div className="contact-item">
-                <span className="contact-icon">📧</span>
-                <a href="mailto:rahuldhakarmm@gmail.com" className="contact-link">rahuldhakarmm@gmail.com</a>
+    <section className="GetInTouchArea">
+
+      {/* Header Section */}
+      <div className="PageHeader">
+        <h2 className="BackgroundTitle">
+          CONTACT
+        </h2>
+        <h1 className="MainTitle">
+          GET IN <span className="AccentText">TOUCH</span>
+        </h1>
+      </div>
+
+      <div className="ContactLayout">
+        {/* Left Column: Contact Info */}
+        <div className="InfoSidebar">
+          <h3 className="SidebarHeading">
+            DON'T BE SHY !
+          </h3>
+          <p className="SidebarDesc">
+            Feel free to get in touch with me. I am always open to discussing new projects & creative ideas.
+          </p>
+
+          <div className="CardListing">
+            {/* Address Card */}
+            <div className="ContactItem">
+              <FaMap className="ItemIcon mt-1" />
+              <div className="ItemBody">
+                <span className="ItemLabel">ADDRESS POINT</span>
+                <p className="ItemValue pr-4">
+                  Ramganjmandi, Kota, Rajasthan, 326519
+                </p>
               </div>
-              <div className="contact-item">
-                <span className="contact-icon">📱</span>
-                <a href="tel:+919024850689" className="contact-link">+91 9024850689</a>
+            </div>
+
+            {/* Mail Card */}
+            <div className="ContactItem">
+              <FaEnvelopeOpen className="ItemIcon mt-1" />
+              <div className="ItemBody">
+                <span className="ItemLabel">MAIL ME</span>
+                <a href="mailto:rahuldhakarmm@gmail.com" className="ItemValue MailLink">
+                  rahuldhakarmm@gmail.com
+                </a>
               </div>
-              <div className="contact-item">
-                <span className="contact-icon">📍</span>
-                <span>KOTA (RAJ) INDIA</span>
+            </div>
+
+            {/* Call Card */}
+            <div className="ContactItem">
+              <FaPhoneSquareAlt className="ItemIcon mt-1" />
+              <div className="ItemBody">
+                <span className="ItemLabel">CALL ME</span>
+                <a href="tel:+919024850689" className="ItemValue">
+                  +91 90248 50689
+                </a>
               </div>
             </div>
           </div>
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group">
+
+          {/* Social Media Links */}
+          <div className="SocialBar">
+            <h4 className="SocialBarTitle">FIND ME ON</h4>
+            <div className="SocialIconList">
+              <a href="https://github.com/BULLET7878" target="_blank" rel="noopener noreferrer" className="SocialIconLink">
+                <FaGithub />
+              </a>
+              <a href="https://www.linkedin.com/in/rahuldhakad0907/" target="_blank" rel="noopener noreferrer" className="SocialIconLink">
+                <FaLinkedin />
+              </a>
+              <a href="https://www.instagram.com/rahul_dhakad_78?igsh=MWVweHJyNHE1bzkzdg==" target="_blank" rel="noopener noreferrer" className="SocialIconLink">
+                <FaInstagram />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Form */}
+        <div className="FormPanel">
+          <form onSubmit={handleSubmit} className="MessageForm">
+            <div className="FormGrid">
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Your Name"
+                placeholder="YOUR NAME"
+                className="FormInput"
                 required
-                className="form-input"
               />
-            </div>
-            <div className="form-group">
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Your Email"
+                placeholder="YOUR EMAIL"
+                className="FormInput"
                 required
-                className="form-input"
               />
             </div>
-            <div className="form-group">
+
+            <div className="w-full">
               <input
                 type="text"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                placeholder="Subject"
+                placeholder="YOUR SUBJECT"
+                className="FormInput"
                 required
-                className="form-input"
               />
             </div>
-            <div className="form-group">
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Your Message"
-                required
-                rows="5"
-                className="form-input form-textarea"
-              ></textarea>
-            </div>
+
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="YOUR MESSAGE"
+              rows="6"
+              className="FormTextArea"
+              required
+            ></textarea>
+
             <button
               type="submit"
-              className={`btn btn-submit ${isSubmitting ? 'submitting' : ''}`}
-              disabled={isSubmitting}
+              className="SubmitBtn group"
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              <div className="SubmitBtnBg"></div>
+              <span className="SubmitBtnText">
+                {status === 'success' ? 'SENT!' : 'SEND MESSAGE'}
+              </span>
+              <div className="SubmitBtnIconWrapper">
+                <FaPaperPlane className={`SubmitBtnIcon ${status === 'success' ? 'IconBounce' : ''}`} />
+              </div>
             </button>
+
+            <AnimatePresence>
+              {status === 'success' && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="StatusMessage SuccessText"
+                >
+                  Message sent successfully! I'll get back to you soon.
+                </motion.p>
+              )}
+              {status === 'validation-error' && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="StatusMessage ErrorText"
+                >
+                  Please enter a valid email address.
+                </motion.p>
+              )}
+              {status === 'submission-error' && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="StatusMessage ErrorText"
+                >
+                  Submission failed. Please try again or check your internet.
+                </motion.p>
+              )}
+            </AnimatePresence>
           </form>
         </div>
-        
-        {/* Footer with Social Icons */}
-        <footer className={`contact-footer ${isVisible ? 'fade-in' : ''}`}>
-          <div className="footer-social">
-            {socialLinks.map((social) => {
-              const Icon = getIcon(social.icon);
-              return (
-                <a
-                  key={social.id}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-social-icon"
-                  style={{ '--icon-color': social.color }}
-                  aria-label={social.name}
-                >
-                  <Icon size={24} />
-                </a>
-              );
-            })}
-          </div>
-          <p className="footer-text">© 2024 Rahul Dhakad. All rights reserved.</p>
-        </footer>
       </div>
     </section>
   );

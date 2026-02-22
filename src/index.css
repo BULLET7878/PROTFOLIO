@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600;700&display=swap');
 
 * {
   margin: 0;
@@ -7,13 +8,30 @@
 }
 
 :root {
-  --primary-color: #ffd700;
-  --secondary-color: #ffed4e;
-  --text-dark: #2c3e50;
-  --text-light: #7f8c8d;
-  --bg-light: #f5f7fa;
+  --primary-color: #00a2ff;
+  --secondary-color: #0081cc;
+  --bg-color: #111111;
+  --bg-deep: #000000;
+  --text-main: #ffffff;
+  --text-dim: #bbbbbb;
+  --text-faint: #eeeeee;
+  --border-color: #252525;
+  --card-bg: rgba(28, 28, 28, 0.3);
+  --sidebar-bg: #2b2a2a;
+  --shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  --transition-speed: 0.3s;
+}
+
+[data-theme='light'] {
+  --bg-color: #f5f7fa;
+  --bg-deep: #ffffff;
+  --text-main: #2c3e50;
+  --text-dim: #7f8c8d;
+  --text-faint: #dcdde1;
+  --border-color: #e1e8ed;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --sidebar-bg: #ffffff;
   --shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-  --shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 html {
@@ -23,12 +41,18 @@ html {
 body {
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
-  color: #ffffff;
-  background: #000000;
+  color: var(--text-main);
+  background: var(--bg-deep);
   overflow-x: hidden;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
 }
@@ -56,54 +80,26 @@ img {
   padding: 0 2rem;
 }
 
-.fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-light);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color);
+.font-OpenSans {
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* Selection */
 ::selection {
-  background: var(--primary-color);
-  color: var(--text-dark);
+  background: #00a2ff;
+  color: #ffffff;
 }
 
 /* Main Layout */
-.app {
+.PortfolioRoot {
   position: relative;
   min-height: 100vh;
   display: flex;
-  background: #000000;
+  background: var(--bg-color);
+  transition: background-color var(--transition-speed);
 }
 
-.main-content {
+.MainViewport {
   flex: 1;
   width: 100%;
   margin: 0;
@@ -111,13 +107,13 @@ img {
 }
 
 /* Page Transition Animation */
-.page-transition {
+.SceneTransition {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #6B5CF6 0%, #000000 50%, #6B5CF6 100%);
+  background: linear-gradient(135deg, #00a2ff 0%, #000000 50%, #00a2ff 100%);
   background-size: 200% 200%;
   z-index: 9999;
   pointer-events: none;
@@ -130,10 +126,12 @@ img {
     opacity: 0;
     background-position: 0% 50%;
   }
+
   50% {
     opacity: 1;
     background-position: 100% 50%;
   }
+
   100% {
     opacity: 0;
     background-position: 0% 50%;

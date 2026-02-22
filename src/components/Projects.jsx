@@ -1,82 +1,155 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { projects } from '../data/projects';
 import '../styles/Projects.css';
 
-const Projects = () => {
-  const [visibleProjects, setVisibleProjects] = useState([]);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          projects.forEach((project, index) => {
-            setTimeout(() => {
-              setVisibleProjects(prev => [...prev, project.id]);
-            }, index * 150);
-          });
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+const ProjectModal = ({ project, onClose }) => {
+  if (!project) return null;
 
   return (
-    <section id="projects" className="projects-section" ref={sectionRef}>
-      <div className="container">
-        <h2 className="section-title">Projects</h2>
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className={`project-card ${visibleProjects.includes(project.id) ? 'visible' : ''}`}
-            >
-              <div className="project-image">
-                <img src={project.image} alt={project.title} />
-                <div className="project-overlay">
-                  <div className="project-links">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      GitHub
-                    </a>
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      Live Demo
-                    </a>
-                  </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="ModalOverlay"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.8, y: 50, opacity: 0 }}
+          animate={{ scale: 1, y: 0, opacity: 1 }}
+          exit={{ scale: 0.8, y: 50, opacity: 0 }}
+          className="ModalContent"
+          onClick={e => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="CloseBtn"
+          >
+            ✕
+          </button>
+
+          <div className="ModalGrid">
+            <div className="ModalImageSide">
+              <img src={project.image} alt={project.title} className="FullViewImage" />
+            </div>
+            <div className="ModalInfoSide">
+              <h2 className="ModalTitle">
+                {project.title}
+              </h2>
+
+              <div className="DetailList">
+                <div className="DetailRow">
+                  <span className="DetailLabel">Project :</span>
+                  <span className="DetailValue">{project.category}</span>
+                </div>
+                <div className="DetailRow">
+                  <span className="DetailLabel">Tech :</span>
+                  <span className="DetailValue">{project.technologies.join(', ')}</span>
                 </div>
               </div>
-              <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
-                <div className="project-technologies">
-                  {project.technologies.map((tech, index) => (
-                    <span key={index} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
+
+              <p className="DetailDesc">
+                {project.description}
+              </p>
+
+              <div className="LinkButtonGroup">
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="LiveLink"
+                >
+                  View Live
+                </a>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="CodeLink"
+                >
+                  GitHub
+                </a>
               </div>
             </div>
-          ))}
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  return (
+    <section className="PortfolioPage">
+      <div className="PortfolioContainer">
+
+        {/* Header Section */}
+        <div className="PortfolioHeader">
+          <h2 className="BackgroundTitle">
+            WORKS
+          </h2>
+          <h1 className="MainTitle">
+            MY <span className="BlueAccent">PROJECTS</span>
+          </h1>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="GridWrapper">
+          <motion.div
+            layout
+            className="ProjectGrid"
+          >
+            <AnimatePresence mode='popLayout'>
+              {projects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="ProjectCardItem"
+                >
+                  <div
+                    onClick={() => setSelectedProject(project)}
+                    className="CardMediaBox"
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="CardImage"
+                    />
+
+                    {/* Overlay */}
+                    <div className="CardOverlay">
+                      <div className="OverlayContent">
+                        <span className="ViewProjectBtn">
+                          VIEW PROJECT
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Centered Name Below Card */}
+                  <div className="CardFooter">
+                    <h3 className="CardTitle" onClick={() => setSelectedProject(project)}>
+                      {project.title}
+                    </h3>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
+
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 };
