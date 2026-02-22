@@ -45,8 +45,8 @@ export const projects = [
     description: 'A custom-built, fully responsive portfolio website featuring a modern theme engine, high-performance CSS architecture, and seamless contact integration.',
     image: 'https://placehold.co/400x300/333/00a2ff?text=Portfolio',
     technologies: ['React', 'Framer Motion', 'Semantic CSS'],
-    github: 'https://github.com/BULLET7878',
-    live: '#',
+    github: 'https://github.com/BULLET7878/PROTFOLIO',
+    live: 'https://rahuldhakadportfolio.netlify.app/',
     category: 'Portfolio'
   }
 ];
