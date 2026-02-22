@@ -1,4 +1,4 @@
-# Rahul Dhakad - Full Stack Portfolio
+# <img src="public/bullet-logo.png" width="40" height="40" align="center" /> Rahul Dhakad - Full Stack Portfolio
 
 A premium, elegant portfolio website built with React.js using a modern, semantic CSS architecture. Features a dark/light theme, custom animations, and a seamless contact experience.
 
