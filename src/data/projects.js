@@ -35,7 +35,7 @@ export const projects = [
     description: 'A dedicated platform showcasing innovative renewable energy technologies and sustainable solutions. Focused on clean energy awareness and impact tracking.',
     image: 'https://placehold.co/400x300/333/00a2ff?text=RenewableEnergy',
     technologies: ['React', 'CSS', 'Netlify'],
-    github: 'https://github.com/BULLET7878',
+    github: 'https://github.com/Vikash9546/hunters',
     live: 'https://renewable-energyyy.netlify.app/',
     category: 'Environment'
   },
