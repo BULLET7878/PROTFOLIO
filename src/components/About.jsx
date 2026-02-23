@@ -1,56 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { FaDownload, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import * as SiIcons from 'react-icons/si';
 import { motion, AnimatePresence } from 'framer-motion';
 import { skills as skillsData } from '../data/skills';
 import '../styles/About.css';
 
-const CircularProgress = ({ percentage, label }) => {
-  const [offset, setOffset] = useState(282.7);
-  const circleRef = React.useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setOffset(282.7 - (282.7 * percentage) / 100);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (circleRef.current) {
-      observer.observe(circleRef.current);
-    }
-
-    return () => {
-      if (circleRef.current) {
-        observer.unobserve(circleRef.current);
-      }
-    };
-  }, [percentage]);
+const SkillIcon = ({ label, iconName, color }) => {
+  const IconComponent = SiIcons[iconName];
 
   return (
-    <div className="SkillProgressBlock">
-      <div className="CircularWrapper" ref={circleRef}>
-        <svg className="CircularSvg" viewBox="0 0 100 100">
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            className="CirlceTrack"
-          />
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            strokeDasharray="282.7"
-            strokeDashoffset={offset}
-            className="CircleFill"
-          />
-        </svg>
-        <span className="ProgressPercent">
-          {percentage}%
-        </span>
+    <div className="SkillBox">
+      <div className="SkillIconWrapper">
+        {IconComponent ? (
+          <IconComponent className="SkillTechIcon" style={{ color: color }} />
+        ) : (
+          <span className="SkillPlaceholder">{label.charAt(0)}</span>
+        )}
       </div>
       <span className="SkillLabel">
         {label}
@@ -159,7 +124,12 @@ const About = () => {
             </h3>
             <div className="SkillsGrid">
               {skillsData.map((skill) => (
-                <CircularProgress key={skill.id} label={skill.name} percentage={skill.level} />
+                <SkillIcon
+                  key={skill.id}
+                  label={skill.name}
+                  iconName={skill.icon}
+                  color={skill.color}
+                />
               ))}
             </div>
           </div>

@@ -389,57 +389,52 @@
     }
 }
 
-.SkillProgressBlock {
+.SkillBox {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1.5rem;
 }
 
-.CircularWrapper {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin-bottom: 1.5rem;
-}
-
-.CircularSvg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-}
-
-.CirlceTrack {
-    stroke: var(--border-color);
-    stroke-width: 8;
-    fill: transparent;
-}
-
-.CircleFill {
-    stroke: #00a2ff;
-    stroke-width: 8;
-    fill: transparent;
-    stroke-linecap: round;
-    transition: all 1s ease-out;
-}
-
-.ProgressPercent {
-    position: absolute;
-    inset: 0;
+.SkillIconWrapper {
+    width: 100px;
+    height: 100px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-main);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+}
+
+.SkillBox:hover .SkillIconWrapper {
+    border-color: #00a2ff;
+    background-color: rgba(0, 162, 255, 0.05);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 162, 255, 0.15);
+}
+
+.SkillTechIcon {
+    font-size: 3.5rem;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.SkillBox:hover .SkillTechIcon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .SkillLabel {
     color: var(--text-main);
     text-transform: uppercase;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.1em;
+    opacity: 0.8;
 }
 
 /* Timeline Components */
