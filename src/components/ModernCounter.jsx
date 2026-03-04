@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
 
-const EliteCounter = ({ value, max = 100 }) => {
+const ModernCounter = ({ value, max = 100 }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
     const count = useMotionValue(0);
@@ -26,4 +26,4 @@ const EliteCounter = ({ value, max = 100 }) => {
     return <motion.span ref={ref}>{rounded}</motion.span>;
 };
 
-export default EliteCounter;
+export default ModernCounter;

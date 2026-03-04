@@ -5,7 +5,7 @@ import { FiMonitor, FiCode, FiZap, FiBriefcase, FiLayers, FiExternalLink, FiGith
 import { projects as projectsData } from '../data/projects';
 import '../styles/Home.css';
 
-import EliteCounter from './EliteCounter';
+import ModernCounter from './ModernCounter';
 
 const MagneticText = ({ children, className }) => {
   const ref = useRef(null);
@@ -353,7 +353,7 @@ const Home = () => {
                 <FiBriefcase />
               </div>
               <h3 className="StatNumber">
-                <EliteCounter value={2} />
+                <ModernCounter value={2} />
                 <span className="StatPlus">+</span>
               </h3>
               <p className="StatTitle">YEARS OF EXPERIENCE</p>
@@ -371,7 +371,7 @@ const Home = () => {
                 <FiLayers />
               </div>
               <h3 className="StatNumber">
-                <EliteCounter value={7} />
+                <ModernCounter value={7} />
                 <span className="StatPlus">+</span>
               </h3>
               <p className="StatTitle">PROJECTS COMPLETED</p>

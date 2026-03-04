@@ -6,7 +6,7 @@ import { skills as skillsData } from '../data/skills';
 import '../styles/About.css';
 import '../styles/Home.css'; // Reuse common glass/glow styles
 
-import EliteCounter from './EliteCounter';
+import ModernCounter from './ModernCounter';
 
 const SkillIcon = ({ label, iconName, color, index, activeChainIndex, onHover }) => {
   const IconComponent = SiIcons[iconName];
@@ -205,7 +205,7 @@ const About = () => {
                     >
                       <span className="StatLabelHeader">{stat.text}</span>
                       <div className="StatValueText">
-                        <EliteCounter value={parseInt(stat.number)} />
+                        <ModernCounter value={parseInt(stat.number)} />
                         <span>+</span>
                       </div>
                     </motion.div>
