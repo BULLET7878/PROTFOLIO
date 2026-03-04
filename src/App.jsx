@@ -17,11 +17,11 @@ const SectionScanlines = () => {
   );
 };
 
-const EliteFooter = () => {
+const SiteFooter = () => {
   return (
-    <footer className="EliteFooter">
+    <footer className="SiteFooter">
       <div className="FooterContainer">
-        <div className="FooterLogo">R<span style={{ color: 'var(--nexus-accent)' }}>.</span>D</div>
+        <div className="FooterLogo">R<span style={{ color: 'var(--primary-accent)' }}>.</span>D</div>
         <p className="CopyrightText">DHAKAD © 2025 All rights reserved</p>
       </div>
       <div className="FooterGlow" />
@@ -44,6 +44,14 @@ function AppContent() {
   }, []);
 
   useEffect(() => {
+    // Reset scroll to top on path change
+    window.scrollTo(0, 0);
+
+    // Ensure browser doesn't restore scroll position on refresh
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     setIsTransitioning(true);
     const timer = setTimeout(() => {
       setIsTransitioning(false);
@@ -54,7 +62,7 @@ function AppContent() {
   return (
     <div className="PortfolioRoot">
       <SectionScanlines />
-      <div className="EliteGrain" />
+      <div className="BackgroundGrain" />
       <motion.div className="ScrollProgressBar" style={{ scaleX }} />
       <FloatingParticles />
       <Topbar />
@@ -67,7 +75,7 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
-      <EliteFooter />
+      <SiteFooter />
     </div>
   );
 }

@@ -134,8 +134,8 @@ img {
   transition: background-color var(--transition-speed);
 }
 
-/* Elite Grain Overlay */
-.EliteGrain {
+/* Background Grain Overlay */
+.BackgroundGrain {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -248,8 +248,8 @@ img {
   box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
 }
 
-/* Elite Footer */
-.EliteFooter {
+/* Site Footer */
+.SiteFooter {
   padding: 0.5rem 0 0.25rem;
   background: var(--bg-deep);
   border-top: 1px solid var(--glass-border-light);
