@@ -1,26 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
 import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import ThemeToggle from './components/ThemeToggle';
+import FloatingParticles from './components/FloatingParticles';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import './index.css';
 
+const SectionScanlines = () => {
+  return (
+    <div className="GlobalScanlines">
+      <div className="ScanlineBeam" />
+    </div>
+  );
+};
+
+const EliteFooter = () => {
+  return (
+    <footer className="EliteFooter">
+      <div className="FooterContainer">
+        <div className="FooterLogo">R<span style={{ color: 'var(--nexus-accent)' }}>.</span>D</div>
+        <p className="CopyrightText">DHAKAD © 2025 All rights reserved</p>
+      </div>
+      <div className="FooterGlow" />
+    </footer>
+  );
+};
+
 function AppContent() {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const location = useLocation();
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-  };
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }, []);
 
   useEffect(() => {
     setIsTransitioning(true);
@@ -32,8 +53,11 @@ function AppContent() {
 
   return (
     <div className="PortfolioRoot">
-      <Sidebar />
-      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      <SectionScanlines />
+      <div className="EliteGrain" />
+      <motion.div className="ScrollProgressBar" style={{ scaleX }} />
+      <FloatingParticles />
+      <Topbar />
       {isTransitioning && <div className="SceneTransition"></div>}
       <main className="MainViewport">
         <Routes location={location}>
@@ -43,6 +67,7 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
+      <EliteFooter />
     </div>
   );
 }

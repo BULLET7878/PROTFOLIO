@@ -1,0 +1,155 @@
+/* Topbar.css - Premium Top Navbar styling */
+
+.Topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.Topbar.Scrolled {
+    padding: 1rem 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.TopbarContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.BrandLogo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--text-main);
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.AccentDot {
+    color: var(--primary-color);
+}
+
+/* Desktop Navigation */
+.DesktopNav {
+    display: none;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+    .DesktopNav {
+        display: flex;
+    }
+}
+
+.TopNavLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.TopNavLink:hover {
+    color: var(--text-main);
+}
+
+.TopNavLink.Active {
+    color: var(--primary-color);
+}
+
+.NavIcon {
+    font-size: 18px;
+}
+
+.ActiveIndicator {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Mobile Toggle */
+.MobileMenuToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 28px;
+    z-index: 1001;
+}
+
+@media (min-width: 1024px) {
+    .MobileMenuToggle {
+        display: none;
+    }
+}
+
+/* Mobile Menu */
+.MobileNavOverlay {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 999;
+    padding: 2rem 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+}
+
+.MobileNavList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.MobileNavLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    width: 100%;
+    transition: color 0.3s;
+}
+
+.MobileNavLink.Active {
+    color: var(--primary-color);
+}
+
+.MobileNavIcon {
+    font-size: 24px;
+}

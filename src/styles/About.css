@@ -1,28 +1,23 @@
 /* About.css */
 
 .AboutPage {
-    background-color: var(--bg-color);
-    min-height: 100vh;
-    color: var(--text-main);
-    font-family: 'Poppins', sans-serif;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding: 4rem 0 0;
     position: relative;
     overflow: hidden;
-    transition: background-color var(--transition-speed), color var(--transition-speed);
+    background: var(--bg-deep);
 }
 
 @media (min-width: 1024px) {
     .AboutPage {
-        padding-top: 140px;
-        padding-bottom: 140px;
+        padding-top: 80px;
+        padding-bottom: 0;
     }
 }
 
 .AboutContainer {
-    width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     position: relative;
     z-index: 10;
 }
@@ -32,6 +27,11 @@
     position: relative;
     text-align: center;
     margin-bottom: 4rem;
+}
+
+.AboutHeader {
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 @media (min-width: 1024px) {
@@ -190,98 +190,7 @@
     color: #5eb85c;
 }
 
-/* Download Button */
-.DownloadWrapper {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-@media (min-width: 1024px) {
-    .DownloadWrapper {
-        justify-content: center;
-    }
-}
-
-.CenterBtn {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-}
-
-.DownloadButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 2px solid #00a2ff;
-    color: var(--text-main);
-    border-radius: 35px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    height: 50px;
-    min-width: 220px;
-    background: transparent;
-}
-
-.DownloadButton:hover {
-    background-color: #00a2ff;
-    color: white;
-}
-
-.DownloadBtnBg {
-    position: absolute;
-    inset: 0;
-    background-color: #00a2ff;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 0;
-}
-
-.DownloadButton:hover .DownloadBtnBg {
-    transform: translateX(0);
-}
-
-.DownloadBtnText {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.DownloadButton:hover .DownloadBtnText {
-    transform: translateX(-1rem);
-}
-
-.DownloadBtnIconBox {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    opacity: 0;
-    transform: translateX(1rem);
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.DownloadButton:hover .DownloadBtnIconBox {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.DownloadIcon {
-    color: white;
-    font-size: 1.125rem;
-}
+/* Removed generic Download Btn CSS as it uses generic PremiumButton */
 
 /* Stats Column */
 .StatsCol {
@@ -313,13 +222,39 @@
 }
 
 .StatCard {
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 2.5rem;
+    padding: 2.5rem 1.5rem;
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
     position: relative;
-    background-color: var(--card-bg);
-    backdrop-filter: blur(4px);
-    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--glass-shadow);
+    overflow: hidden;
+}
+
+.StatCard::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+.StatCard:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--neon-glow);
+    border-color: rgba(0, 243, 255, 0.4);
+}
+
+.StatCard:hover::before {
+    opacity: 1;
 }
 
 @media (min-width: 1024px) {
@@ -329,9 +264,13 @@
 }
 
 .StatNumber {
-    color: #00a2ff;
-    font-size: 50px;
-    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 48px;
+    font-weight: 800;
     margin: 0;
     line-height: 1;
     margin-bottom: 1rem;
@@ -367,7 +306,7 @@
 
 /* Skills Area */
 .SkillsArea {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 @media (min-width: 1024px) {
@@ -378,49 +317,157 @@
 
 .SkillsGrid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 4rem 0;
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    position: relative;
+    isolation: isolate;
 }
 
 @media (min-width: 1024px) {
     .SkillsGrid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 5rem 0;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 3rem;
     }
 }
 
+.ConstellationWrapper {
+    position: absolute;
+    inset: -100px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.ConstellationSVG {
+    width: 100%;
+    height: 100%;
+}
+
 .SkillBox {
+    position: relative;
+    padding: 1.5rem;
+    background: var(--glass-panel-bg);
+    border: 1px solid var(--glass-border-light);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+.SkillBox::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(0, 243, 255, 0.1) 0%,
+            transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.SkillBox:hover::before {
+    opacity: 1;
+}
+
+.SkillBox.chain-glow {
+    border-color: rgba(0, 243, 255, 0.15);
+}
+
+/* Hardware Stats Dashboard */
+.StatCard {
+    background: rgba(10, 10, 20, 0.6);
+    border: 1px solid var(--glass-border-light);
+    border-radius: 24px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+}
+
+.StatCard::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.3), transparent);
+    animation: statSweep 6s linear infinite;
+}
+
+@keyframes statSweep {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.StatLabelHeader {
+    font-size: 11px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.StatValueText {
+    font-size: 48px;
+    font-weight: 800;
+    font-family: var(--font-main);
+    color: var(--text-main);
 }
 
 .SkillIconWrapper {
     width: 100px;
     height: 100px;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
+    background: var(--glass-panel-bg);
+    border: 1px solid var(--glass-border-light);
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--glass-shadow);
+    z-index: 2;
 }
 
 .SkillBox:hover .SkillIconWrapper {
-    border-color: #00a2ff;
-    background-color: rgba(0, 162, 255, 0.05);
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 162, 255, 0.15);
+    border-color: var(--skill-color, var(--primary-accent));
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 243, 255, 0.1);
 }
 
 .SkillTechIcon {
     font-size: 3.5rem;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--skill-color);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+[data-theme='light'] .SkillTechIcon {
+    /* Ensure light icons are visible by darkening them or adding a subtle glow/shadow */
+    filter: brightness(0.8) contrast(1.2);
+    /* For white-ish icons, force a darker color if needed */
+    color: var(--skill-color);
+}
+
+/* Specific fix for white icons in light mode if the variable is white */
+[data-theme='light'] .SkillTechIcon[style*="#ffffff"],
+[data-theme='light'] .SkillTechIcon[style*="white"] {
+    color: var(--primary-color) !important;
 }
 
 .SkillBox:hover .SkillTechIcon {
@@ -439,7 +486,7 @@
 
 /* Timeline Components */
 .TimelineArea {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 @media (min-width: 1024px) {
@@ -472,31 +519,46 @@
     left: 20px;
     top: 0;
     bottom: 0;
-    width: 1px;
-    background-color: var(--border-color);
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary-color), var(--secondary-color), transparent);
+    opacity: 0.5;
 }
 
 .TimelineContent {
     position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.TimelineContent:hover {
+    transform: translateX(10px);
+    border-color: rgba(0, 243, 255, 0.3);
+    box-shadow: var(--glass-shadow);
 }
 
 .TimelineIconBox {
     position: absolute;
-    left: -56px;
-    top: 0;
-    width: 40px;
-    height: 40px;
-    background-color: #00a2ff;
+    left: -76px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
+    box-shadow: 0 0 20px rgba(188, 19, 254, 0.4);
 }
 
 .TimelineIcon {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .TimelineBadge {
@@ -514,7 +576,7 @@
     display: inline-block;
 }
 
-.EntryTitle {
+.NameHeading {
     font-size: 18px;
     font-weight: 700;
     color: var(--text-main);
@@ -560,11 +622,115 @@
     background-color: var(--border-color);
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
 }
 
 @media (min-width: 1024px) {
     .PageSeparator {
-        margin-bottom: 120px;
+        margin-bottom: 80px;
+    }
+}
+
+/* Nexus Workflow */
+.WorkflowArea {
+    padding: 2rem 0;
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.WorkflowGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-top: 2rem;
+    position: relative;
+}
+
+.WorkflowPathWrapper {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 100px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.WorkflowStep {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    min-height: 150px;
+}
+
+.StepLeft {
+    justify-content: flex-start;
+    padding-right: 20%;
+}
+
+.StepRight {
+    justify-content: flex-end;
+    padding-left: 20%;
+    text-align: right;
+}
+
+.StepNumberOutline {
+    position: absolute;
+    font-size: 110px;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    line-height: 1;
+    z-index: 0;
+    pointer-events: none;
+    font-family: var(--font-headline);
+}
+
+.StepLeft .StepNumberOutline {
+    left: -20px;
+    top: -20px;
+}
+
+.StepRight .StepNumberOutline {
+    right: -20px;
+    top: -20px;
+}
+
+.StepContent {
+    position: relative;
+    z-index: 1;
+    max-width: 400px;
+    padding: 1rem;
+}
+
+.StepTitle {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.StepDesc {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .WorkflowPathWrapper {
+        display: none;
+        /* Hide complex path on mobile for performance/readability */
+    }
+
+    .StepLeft,
+    .StepRight {
+        padding: 0;
+        justify-content: flex-start;
+        text-align: left;
     }
 }
