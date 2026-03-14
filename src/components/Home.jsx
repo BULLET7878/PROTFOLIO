@@ -6,6 +6,8 @@ import { projects as projectsData } from '../data/projects';
 import '../styles/Home.css';
 
 import ModernCounter from './ModernCounter';
+import Hero3D from './Hero3D';
+import TiltCard from './TiltCard';
 
 const MagneticText = ({ children, className }) => {
   const ref = useRef(null);
@@ -15,23 +17,27 @@ const MagneticText = ({ children, className }) => {
   const handleMouseMove = (e) => {
     if (!ref.current) return;
     const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
 
-    // Calculate distance to center
-    const dist = Math.hypot(clientX - centerX, clientY - centerY);
-    const radius = 200; // Activation radius
+    requestAnimationFrame(() => {
+      if (!ref.current) return;
+      const { left, top, width, height } = ref.current.getBoundingClientRect();
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
 
-    if (dist < radius) {
-      // Magnetic pull effect
-      const force = (radius - dist) / radius;
-      mouseX.set((clientX - centerX) * force * 0.4);
-      mouseY.set((clientY - centerY) * force * 0.4);
-    } else {
-      animate(mouseX, 0, { type: "spring", stiffness: 100, damping: 10 });
-      animate(mouseY, 0, { type: "spring", stiffness: 100, damping: 10 });
-    }
+      // Calculate distance to center
+      const dist = Math.hypot(clientX - centerX, clientY - centerY);
+      const radius = 200; // Activation radius
+
+      if (dist < radius) {
+        // Magnetic pull effect
+        const force = (radius - dist) / radius;
+        mouseX.set((clientX - centerX) * force * 0.4);
+        mouseY.set((clientY - centerY) * force * 0.4);
+      } else {
+        animate(mouseX, 0, { type: "spring", stiffness: 100, damping: 10 });
+        animate(mouseY, 0, { type: "spring", stiffness: 100, damping: 10 });
+      }
+    });
   };
 
   const handleMouseLeave = () => {
@@ -60,11 +66,15 @@ const MagneticButton = ({ children, to, className }) => {
   const handleMouseMove = (e) => {
     if (!ref.current) return;
     const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
-    x.set((clientX - centerX) * 0.3);
-    y.set((clientY - centerY) * 0.3);
+
+    requestAnimationFrame(() => {
+      if (!ref.current) return;
+      const { left, top, width, height } = ref.current.getBoundingClientRect();
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+      x.set((clientX - centerX) * 0.3);
+      y.set((clientY - centerY) * 0.3);
+    });
   };
 
   const handleMouseLeave = () => {
@@ -89,9 +99,9 @@ const MagneticButton = ({ children, to, className }) => {
 
 const Home = () => {
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
   const opacityFade = useTransform(scrollY, [0, 300], [1, 0]);
+  const textScale = useTransform(scrollY, [0, 500], [1, 1.1]);
+  const textY = useTransform(scrollY, [0, 500], [0, 50]);
 
   // Section Refs
   const heroRef = useRef(null);
@@ -187,9 +197,6 @@ const Home = () => {
     <div className="HomeWrapper">
       {/* --- HERO SECTION --- */}
       <section className="HeroSection" ref={heroRef}>
-        <motion.div className="BgGlow blueGlow" style={{ y: y1 }} />
-        <motion.div className="BgGlow purpleGlow" style={{ y: y2 }} />
-
         <motion.div
           className="HeroContainer"
           variants={containerVariants}
@@ -199,7 +206,7 @@ const Home = () => {
         >
           <div className="HeroFlexWrapper">
             {/* Hero Content */}
-            <div className="IntroColumn">
+            <motion.div className="IntroColumn" style={{ y: textY, scale: textScale }}>
               <motion.div className="IntroTextGroup" variants={itemVariants}>
                 <div className="InternshipBadge">
                   <span className="PulseDot"></span>
@@ -219,13 +226,13 @@ const Home = () => {
               </motion.p>
 
               <motion.div className="ActionBtnWrapper" variants={itemVariants}>
-                <MagneticButton to="/about" className="PremiumButton group clickable">
+                <MagneticButton to="/about" className="PremiumButton group clickable" whileTap={{ scale: 0.95 }}>
                   <span className="ButtonGlow"></span>
                   <span className="ButtonText">EXPLORE MORE</span>
                   <span className="ButtonIcon">→</span>
                 </MagneticButton>
               </motion.div>
-            </div>
+            </motion.div>
 
             {/* Profile Photo */}
             <motion.div className="AvatarColumn" variants={imageVariants}>
@@ -262,21 +269,21 @@ const Home = () => {
               </motion.div>
             </motion.div>
           </div>
+        </motion.div>
 
-          <motion.div
-            className="EliteScrollPrompt"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-          >
-            <span className="ScrollLabel">SCROLL TO EXPLORE</span>
-            <div className="ScrollLine" />
-          </motion.div>
+        <motion.div
+          className="EliteScrollPrompt"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          <span className="ScrollLabel">SCROLL TO EXPLORE</span>
+          <div className="ScrollLine" />
         </motion.div>
       </section>
 
       {/* --- SCROLL: ABOUT BIO SECTION --- */}
-      < section className="HomeBioSection" ref={bioRef} >
+      <section className="HomeBioSection" ref={bioRef}>
         <div className="ContainerBox">
           <motion.div
             className="BioContentCard GlassPanel"
@@ -311,19 +318,10 @@ const Home = () => {
           </motion.div>
 
           <div className="ServicesGrid" style={{ overflowX: 'hidden', padding: '1rem 0' }}>
-            {servicesData.map((service, idx) => {
-              // Alternate direction: even indices slide from left (-100), odd from right (100)
-              const xStart = idx % 2 === 0 ? -100 : 100;
-
-              return (
-                <motion.div
-                  key={service.id}
+            {servicesData.map((service) => (
+              <TiltCard key={service.id} className="ServiceCardWrapper">
+                <div
                   className="ServiceCard GlassPanel"
-                  initial={{ opacity: 0, x: xStart }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, delay: idx * 0.2, ease: "easeOut" }}
-                  whileHover={{ y: -10, scale: 1.02 }}
                 >
                   <div className="ServiceIconBox">
                     {service.icon}
@@ -331,9 +329,9 @@ const Home = () => {
                   <h3 className="ServiceTitle">{service.title}</h3>
                   <p className="ServiceDesc">{service.desc}</p>
                   <div className="ServiceGlowBackground"></div>
-                </motion.div>
-              );
-            })}
+                </div>
+              </TiltCard>
+            ))}
           </div>
         </div>
       </section >
@@ -342,41 +340,45 @@ const Home = () => {
       < section className="HomeStatsSection" >
         <div className="ContainerBox">
           <div className="StatsGrid">
-            <motion.div
-              className="StatCard GlassPanel"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="StatIconWrapper">
-                <FiBriefcase />
-              </div>
-              <h3 className="StatNumber">
-                <ModernCounter value={2} />
-                <span className="StatPlus">+</span>
-              </h3>
-              <p className="StatTitle">YEARS OF EXPERIENCE</p>
-              <div className="StatGlow"></div>
-            </motion.div>
+            <TiltCard>
+              <motion.div
+                className="StatCard GlassPanel"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="StatIconWrapper">
+                  <FiBriefcase />
+                </div>
+                <h3 className="StatNumber">
+                  <ModernCounter value={2} />
+                  <span className="StatPlus">+</span>
+                </h3>
+                <p className="StatTitle">YEARS OF EXPERIENCE</p>
+                <div className="StatGlow"></div>
+              </motion.div>
+            </TiltCard>
 
-            <motion.div
-              className="StatCard GlassPanel"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="StatIconWrapper">
-                <FiLayers />
-              </div>
-              <h3 className="StatNumber">
-                <ModernCounter value={7} />
-                <span className="StatPlus">+</span>
-              </h3>
-              <p className="StatTitle">PROJECTS COMPLETED</p>
-              <div className="StatGlow"></div>
-            </motion.div>
+            <TiltCard>
+              <motion.div
+                className="StatCard GlassPanel"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <div className="StatIconWrapper">
+                  <FiLayers />
+                </div>
+                <h3 className="StatNumber">
+                  <ModernCounter value={7} />
+                  <span className="StatPlus">+</span>
+                </h3>
+                <p className="StatTitle">PROJECTS COMPLETED</p>
+                <div className="StatGlow"></div>
+              </motion.div>
+            </TiltCard>
           </div>
         </div>
       </section >
@@ -396,39 +398,40 @@ const Home = () => {
 
           <div className="FeaturedProjectsGrid">
             {projectsData.slice(0, 2).map((project, idx) => (
-              <motion.div
-                key={project.id}
-                className="FeaturedProjectCard GlassPanel"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.2 }}
-              >
-                <div className="ProjectImageWrapper">
-                  <img src={project.image} alt={project.title} className="ProjectImage" />
-                  <div className="ProjectImageOverlay"></div>
-                </div>
+              <TiltCard key={project.id}>
+                <motion.div
+                  className="FeaturedProjectCard GlassPanel"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: idx * 0.2 }}
+                >
+                  <div className="ProjectImageWrapper">
+                    <img src={project.image} alt={project.title} className="ProjectImage" />
+                    <div className="ProjectImageOverlay"></div>
+                  </div>
 
-                <div className="ProjectActionLinks">
-                  <a href={project.live} target="_blank" rel="noreferrer" className="ProjectLink group">
-                    <FiExternalLink /> <span>LIVE</span>
-                  </a>
-                  <a href={project.github} target="_blank" rel="noreferrer" className="ProjectLink group">
-                    <FiGithub /> <span>CODE</span>
-                  </a>
-                </div>
+                  <div className="ProjectActionLinks">
+                    <a href={project.live} target="_blank" rel="noreferrer" className="ProjectLink group">
+                      <FiExternalLink /> <span>LIVE</span>
+                    </a>
+                    <a href={project.github} target="_blank" rel="noreferrer" className="ProjectLink group">
+                      <FiGithub /> <span>CODE</span>
+                    </a>
+                  </div>
 
-                <div className="ProjectFooter">
-                  <h3 className="ProjectName">{project.title}</h3>
-                </div>
-              </motion.div>
+                  <div className="ProjectFooter">
+                    <h3 className="ProjectName">{project.title}</h3>
+                  </div>
+                </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>
       </section >
 
       {/* --- SCROLL: FINAL CTA SECTION --- */}
-      < section className="HomeCTASection" >
+      <section className="HomeCTASection">
         <div className="ContainerBox">
           <motion.div
             className="CTAContent GlassPanel"
@@ -442,14 +445,20 @@ const Home = () => {
 
             <div className="CTABtnWrapper">
               <Link to="/contact" className="PremiumButton group clickable">
-                <span className="ButtonGlow"></span>
-                <span className="ButtonText">LET'S WORK TOGETHER</span>
-                <span className="ButtonIcon">→</span>
+                {/* Adding motion wrapper for tap effect since this is a Link directly */}
+                <motion.div
+                  style={{ display: 'flex', alignItems: 'center', gap: 'inherit', width: '100%' }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="ButtonGlow"></span>
+                  <span className="ButtonText">LET'S WORK TOGETHER</span>
+                  <span className="ButtonIcon">→</span>
+                </motion.div>
               </Link>
             </div>
           </motion.div>
         </div>
-      </section >
+      </section>
     </div >
   );
 };

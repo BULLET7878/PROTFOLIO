@@ -1,52 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { AnimatePresence, motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { AnimatePresence, motion, useTransform, useMotionValue } from 'framer-motion';
 import { LuExternalLink, LuGithub } from 'react-icons/lu';
 import { projects } from '../data/projects';
 import '../styles/Projects.css';
 import '../styles/Home.css';
+import TiltCard from './TiltCard';
+import Hero3D from './Hero3D';
 
-const TiltCard = ({ children, className, onClick }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const rotateX = useTransform(y, [-100, 100], [12, -12]);
-  const rotateY = useTransform(x, [-100, 100], [-12, 12]);
-
-  const springConfig = { stiffness: 100, damping: 25, mass: 0.5 };
-  const springX = useSpring(rotateX, springConfig);
-  const springY = useSpring(rotateY, springConfig);
-
-  function handleMouseMove(event) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set(event.clientX - centerX);
-    y.set(event.clientY - centerY);
-  }
-
-  function handleMouseLeave() {
-    x.set(0);
-    y.set(0);
-  }
-
-  return (
-    <motion.div
-      className={className}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={onClick}
-      style={{
-        rotateX: springX,
-        rotateY: springY,
-        transformStyle: "preserve-3d",
-      }}
-    >
-      <div style={{ transform: "translateZ(20px)", transformStyle: "preserve-3d" }}>
-        {children}
-      </div>
-    </motion.div>
-  );
-};
 
 const PhotonPath = () => {
   return (
@@ -69,39 +29,54 @@ const PhotonPath = () => {
   );
 };
 
+const KineticShape = ({ i, mouseX, mouseY }) => {
+  return (
+    <motion.div
+      className="FloatingShape"
+      style={{
+        x: useTransform(mouseX, [0, window.innerWidth], [i * 20, i * -20]),
+        y: useTransform(mouseY, [0, window.innerHeight], [i * 15, i * -15]),
+      }}
+      animate={{
+        rotate: [0, 360],
+        opacity: 0.1,
+      }}
+      transition={{
+        duration: 20 + i * 5,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+    />
+  );
+};
+
 const KineticGeometry = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   useEffect(() => {
+    let animationFrameId;
+
     const handleMouseMove = (e) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      animationFrameId = requestAnimationFrame(() => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+      });
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    }
   }, [mouseX, mouseY]);
 
   return (
     <div className="KineticContainer">
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="FloatingShape"
-          style={{
-            x: useTransform(mouseX, [0, window.innerWidth], [i * 20, i * -20]),
-            y: useTransform(mouseY, [0, window.innerHeight], [i * 15, i * -15]),
-          }}
-          animate={{
-            rotate: [0, 180, 360],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 20 + i * 5,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
+      {[...Array(4)].map((_, i) => (
+        <KineticShape key={i} i={i} mouseX={mouseX} mouseY={mouseY} />
       ))}
     </div>
   );
@@ -243,15 +218,9 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const containerRef = useRef(null);
 
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-
   return (
     <section className="PortfolioPage" ref={containerRef}>
       <KineticGeometry />
-      <motion.div className="BgGlow blueGlow" style={{ y: y1 }} />
-      <motion.div className="BgGlow purpleGlow" style={{ y: y2 }} />
 
       <div className="PortfolioContainer">
         <div className="PortfolioHeader">

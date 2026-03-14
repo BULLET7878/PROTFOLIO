@@ -225,10 +225,8 @@
     padding: 2.5rem 1.5rem;
     border-radius: 24px;
     border: 1px solid var(--glass-border);
-    background: var(--glass-bg);
+    background: rgba(10, 10, 20, 0.9);
     position: relative;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: var(--glass-shadow);
     overflow: hidden;
@@ -429,7 +427,7 @@
 .SkillIconWrapper {
     width: 100px;
     height: 100px;
-    background: var(--glass-panel-bg);
+    background: rgba(20, 20, 30, 0.8);
     border: 1px solid var(--glass-border-light);
     border-radius: 24px;
     display: flex;
@@ -438,7 +436,6 @@
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(12px);
     box-shadow: var(--glass-shadow);
     z-index: 2;
 }
@@ -526,11 +523,10 @@
 
 .TimelineContent {
     position: relative;
-    background: var(--glass-bg);
+    background: rgba(15, 15, 25, 0.9);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 2rem;
-    backdrop-filter: blur(10px);
     transition: all 0.3s;
 }
 

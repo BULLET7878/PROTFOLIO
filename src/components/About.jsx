@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FaDownload, FaGraduationCap } from 'react-icons/fa';
 import * as SiIcons from 'react-icons/si';
-import { motion, useInView, useSpring, useTransform, useScroll, useMotionValue, animate } from 'framer-motion';
+import { motion, useSpring, useScroll } from 'framer-motion';
 import { skills as skillsData } from '../data/skills';
 import '../styles/About.css';
 import '../styles/Home.css'; // Reuse common glass/glow styles
 
 import ModernCounter from './ModernCounter';
+import TiltCard from './TiltCard';
+import Hero3D from './Hero3D';
 
 const SkillIcon = ({ label, iconName, color, index, activeChainIndex, onHover }) => {
   const IconComponent = SiIcons[iconName];
@@ -125,7 +127,6 @@ const About = () => {
     document.body.removeChild(link);
   };
 
-  const { scrollY } = useScroll();
   const { scrollYProgress: workflowScroll } = useScroll({
     target: workflowRef,
     offset: ["start end", "end start"]
@@ -136,9 +137,6 @@ const About = () => {
     damping: 30,
     restDelta: 0.001
   });
-
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
   const personalInfos = [
     { label: 'Name', value: 'Rahul Dhakad' },
@@ -156,11 +154,8 @@ const About = () => {
   ];
 
   return (
-    <section className="AboutPage">
-      <motion.div className="BgGlow blueGlow" style={{ y: y1 }} />
-      <motion.div className="BgGlow purpleGlow" style={{ y: y2 }} />
-
-      <div className="AboutContainer">
+    <div className="AboutPage">
+      <motion.div className="AboutContainer">
         {/* Title Section */}
         <div className="AboutHeader">
           <h2 className="SectionLabel">RESUME</h2>
@@ -198,17 +193,18 @@ const About = () => {
               <div className="HomeStatsSection"> {/* Reusing Home style grid */}
                 <div className="StatsGrid">
                   {stats.map((stat, idx) => (
-                    <motion.div
-                      key={idx}
-                      className="StatCard clickable"
-                      whileHover={{ y: -10 }}
-                    >
-                      <span className="StatLabelHeader">{stat.text}</span>
-                      <div className="StatValueText">
-                        <ModernCounter value={parseInt(stat.number)} />
-                        <span>+</span>
-                      </div>
-                    </motion.div>
+                    <TiltCard key={idx} className="StatCardWrapper">
+                      <motion.div
+                        className="StatCard clickable"
+                        whileHover={{ y: -10 }}
+                      >
+                        <span className="StatLabelHeader">{stat.text}</span>
+                        <div className="StatValueText">
+                          <ModernCounter value={parseInt(stat.number)} />
+                          <span>+</span>
+                        </div>
+                      </motion.div>
+                    </TiltCard>
                   ))}
                 </div>
               </div>
@@ -410,10 +406,9 @@ const About = () => {
               <span className="ButtonIcon"><FaDownload /></span>
             </button>
           </div>
-
         </motion.div>
-      </div>
-    </section>
+      </motion.div>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import FloatingParticles from './components/FloatingParticles';
+import Hero3D from './components/Hero3D';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import './index.css';
 
@@ -62,9 +62,8 @@ function AppContent() {
   return (
     <div className="PortfolioRoot">
       <SectionScanlines />
-      <div className="BackgroundGrain" />
       <motion.div className="ScrollProgressBar" style={{ scaleX }} />
-      <FloatingParticles />
+      <Hero3D currentPath={location.pathname} />
       <Topbar />
       {isTransitioning && <div className="SceneTransition"></div>}
       <main className="MainViewport">

@@ -111,8 +111,8 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.6rem 1.2rem;
-    background: rgba(0, 243, 255, 0.08);
-    border: 1px solid rgba(0, 243, 255, 0.2);
+    background: rgba(0, 243, 255, 0.12);
+    border: 1px solid rgba(0, 243, 255, 0.3);
     border-radius: 100px;
     color: var(--primary-accent);
     font-size: 11px;
@@ -120,7 +120,6 @@
     letter-spacing: 0.15em;
     margin-bottom: 2rem;
     text-transform: uppercase;
-    backdrop-filter: blur(12px);
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
 }
 
@@ -201,6 +200,9 @@
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 100;
 }
 
 .PremiumButton::before {
@@ -229,6 +231,7 @@
     z-index: 2;
     position: relative;
     font-size: 13px;
+    pointer-events: none;
 }
 
 .ButtonIcon {
@@ -252,10 +255,9 @@
     width: 280px;
     height: 280px;
     padding: 10px;
-    background: var(--glass-panel-bg);
+    background: rgba(10, 10, 15, 0.8);
     border-radius: 40px;
     border: 1px solid var(--glass-border-light);
-    backdrop-filter: blur(20px);
 }
 
 .BorderBeam {
@@ -320,8 +322,8 @@
     background: var(--glass-bg);
     box-shadow: var(--glass-shadow);
     border: 1px solid var(--glass-border);
-    transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
-    transition: transform 0.5s;
+    transform: perspective(1200px) rotateY(-8deg) rotateX(4deg);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .AvatarImageWrapper:hover {
@@ -356,9 +358,9 @@
     width: 100%;
     height: 100%;
     background: radial-gradient(circle, var(--primary-color) 0%, transparent 60%);
-    opacity: 0.15;
-    filter: blur(50px);
+    opacity: 0.1;
     z-index: 1;
+    pointer-events: none;
 }
 
 /* Floating Orbs */
@@ -367,7 +369,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: var(--glass-bg);
+    background: rgba(20, 20, 25, 0.9);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     display: flex;
@@ -377,7 +379,6 @@
     font-weight: 900;
     color: #fff;
     z-index: 20;
-    backdrop-filter: blur(10px);
 }
 
 .OrbReact {
@@ -574,6 +575,11 @@
     }
 }
 
+.ServiceCardWrapper {
+    margin-bottom: 2rem;
+    height: 100%;
+}
+
 .ServiceCard {
     padding: 3rem 2rem;
     border-radius: 20px;
@@ -583,6 +589,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    will-change: transform;
 }
 
 .ServiceIconBox {
@@ -592,7 +600,8 @@
     -webkit-text-fill-color: transparent;
     font-size: 50px;
     margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    /* Replacing heavy filter: drop-shadow */
 }
 
 .ServiceTitle {
@@ -732,11 +741,10 @@
     flex-direction: column;
     gap: 1.5rem;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
 }
 
-.FeaturedProjectCard:hover {
-    transform: translateY(-10px);
-}
+/* Removed FeaturedProjectCard:hover transform to avoid conflict with TiltCard */
 
 .ProjectImageWrapper {
     width: 100%;
@@ -752,6 +760,7 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
+    will-change: transform;
 }
 
 .FeaturedProjectCard:hover .ProjectImage {
@@ -849,7 +858,11 @@
 }
 
 .CTABtnWrapper {
-    margin-top: 1rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 150;
 }
 
 .CTAContent::after {

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaEnvelopeOpen, FaPhoneSquareAlt, FaPaperPlane, FaMap, FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa';
 import '../styles/Contact.css';
 import '../styles/Home.css'; // Glows & common styles
+import Hero3D from './Hero3D';
+import TiltCard from './TiltCard';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -98,15 +100,8 @@ const Contact = () => {
     }, 5000);
   };
 
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-
   return (
     <section className="GetInTouchArea">
-      <div className="PortalBackground" />
-      <div className="NexusGlow" />
-
       {/* Header Section */}
       <div className="PageHeader">
         <h2 className="SectionLabel">RESUME</h2>
@@ -115,156 +110,160 @@ const Contact = () => {
 
       <div className="ContactLayout">
         {/* Left Column: Contact Info */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="InfoSidebar GlassPanel"
-        >
-          <h3 className="SidebarHeading">DON'T BE SHY !</h3>
-          <p className="SidebarDesc">
-            Feel free to get in touch with me. I am always open to discussing new projects & creative ideas.
-          </p>
+        <div className="InfoSidebar">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="GlassPanel"
+          >
+            <h3 className="SidebarHeading">DON'T BE SHY !</h3>
+            <p className="SidebarDesc">
+              Feel free to get in touch with me. I am always open to discussing new projects & creative ideas.
+            </p>
 
-          <div className="CardListing">
-            <div className="ContactItem">
-              <FaMap className="ItemIcon mt-1" />
-              <div className="ItemBody">
-                <span className="ItemLabel">ADDRESS POINT</span>
-                <p className="ItemValue">Ramganjmandi, Kota, Rajasthan, 326519</p>
+            <div className="CardListing">
+              <div className="ContactItem">
+                <FaMap className="ItemIcon mt-1" />
+                <div className="ItemBody">
+                  <span className="ItemLabel">ADDRESS POINT</span>
+                  <p className="ItemValue">Ramganjmandi, Kota, Rajasthan, 326519</p>
+                </div>
+              </div>
+
+              <div className="ContactItem">
+                <FaEnvelopeOpen className="ItemIcon mt-1" />
+                <div className="ItemBody">
+                  <span className="ItemLabel">MAIL ME</span>
+                  <a href="mailto:rahuldhakarmm@gmail.com" className="ItemValue MailLink">rahuldhakarmm@gmail.com</a>
+                </div>
+              </div>
+
+              <div className="ContactItem">
+                <FaPhoneSquareAlt className="ItemIcon mt-1" />
+                <div className="ItemBody">
+                  <span className="ItemLabel">CALL ME</span>
+                  <a href="tel:+919024850689" className="ItemValue">+91 90248 50689</a>
+                </div>
               </div>
             </div>
 
-            <div className="ContactItem">
-              <FaEnvelopeOpen className="ItemIcon mt-1" />
-              <div className="ItemBody">
-                <span className="ItemLabel">MAIL ME</span>
-                <a href="mailto:rahuldhakarmm@gmail.com" className="ItemValue MailLink">rahuldhakarmm@gmail.com</a>
+            <div className="SocialBar">
+              <h4 className="SocialBarTitle">FIND ME ON</h4>
+              <div className="SocialIconList">
+                <a href="https://github.com/BULLET7878" target="_blank" rel="noopener noreferrer" className="SocialIconLink"><FaGithub /></a>
+                <a href="https://www.linkedin.com/in/rahuldhakad0907/" target="_blank" rel="noopener noreferrer" className="SocialIconLink"><FaLinkedin /></a>
+                <a href="https://www.instagram.com/rahul_dhakad_78?igsh=MWVweHJyNHE1bzkzdg==" target="_blank" rel="noopener noreferrer" className="SocialIconLink"><FaInstagram /></a>
               </div>
             </div>
-
-            <div className="ContactItem">
-              <FaPhoneSquareAlt className="ItemIcon mt-1" />
-              <div className="ItemBody">
-                <span className="ItemLabel">CALL ME</span>
-                <a href="tel:+919024850689" className="ItemValue">+91 90248 50689</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="SocialBar">
-            <h4 className="SocialBarTitle">FIND ME ON</h4>
-            <div className="SocialIconList">
-              <a href="https://github.com/BULLET7878" target="_blank" rel="noopener noreferrer" className="SocialIconLink"><FaGithub /></a>
-              <a href="https://www.linkedin.com/in/rahuldhakad0907/" target="_blank" rel="noopener noreferrer" className="SocialIconLink"><FaLinkedin /></a>
-              <a href="https://www.instagram.com/rahul_dhakad_78?igsh=MWVweHJyNHE1bzkzdg==" target="_blank" rel="noopener noreferrer" className="SocialIconLink"><FaInstagram /></a>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         {/* Right Column: Form */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="FormPanel GlassPanel"
-        >
-          <form onSubmit={handleSubmit} className="MessageForm">
-            <div className="FormGrid">
-              <div className={`NexusInput ${focusedField === 'name' ? 'focused' : ''} ${errors.name ? 'error' : ''}`}>
+        <div className="FormPanel">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="GlassPanel"
+          >
+            <form onSubmit={handleSubmit} className="MessageForm">
+              <div className="FormGrid">
+                <div className={`NexusInput ${focusedField === 'name' ? 'focused' : ''} ${errors.name ? 'error' : ''}`}>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField('name')}
+                    onBlur={() => setFocusedField(null)}
+                    placeholder="YOUR NAME"
+                    className="FormInput"
+                  />
+                  <div className="InputBeam" />
+                </div>
+                <div className={`NexusInput ${focusedField === 'email' ? 'focused' : ''} ${errors.email ? 'error' : ''}`}>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField('email')}
+                    onBlur={() => setFocusedField(null)}
+                    placeholder="YOUR EMAIL"
+                    className="FormInput"
+                  />
+                  <div className="InputBeam" />
+                </div>
+              </div>
+
+              <div className={`NexusInput ${focusedField === 'subject' ? 'focused' : ''} ${errors.subject ? 'error' : ''}`}>
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="subject"
+                  value={formData.subject}
                   onChange={handleChange}
-                  onFocus={() => setFocusedField('name')}
+                  onFocus={() => setFocusedField('subject')}
                   onBlur={() => setFocusedField(null)}
-                  placeholder="YOUR NAME"
+                  placeholder="YOUR SUBJECT"
                   className="FormInput"
                 />
                 <div className="InputBeam" />
               </div>
-              <div className={`NexusInput ${focusedField === 'email' ? 'focused' : ''} ${errors.email ? 'error' : ''}`}>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
+
+              <div className={`NexusInput ${focusedField === 'message' ? 'focused' : ''} ${errors.message ? 'error' : ''}`}>
+                <textarea
+                  name="message"
+                  value={formData.message}
                   onChange={handleChange}
-                  onFocus={() => setFocusedField('email')}
+                  onFocus={() => setFocusedField('message')}
                   onBlur={() => setFocusedField(null)}
-                  placeholder="YOUR EMAIL"
-                  className="FormInput"
-                />
+                  placeholder="YOUR MESSAGE"
+                  rows="4"
+                  className="FormTextArea"
+                ></textarea>
                 <div className="InputBeam" />
               </div>
-            </div>
 
-            <div className={`NexusInput ${focusedField === 'subject' ? 'focused' : ''} ${errors.subject ? 'error' : ''}`}>
-              <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                onFocus={() => setFocusedField('subject')}
-                onBlur={() => setFocusedField(null)}
-                placeholder="YOUR SUBJECT"
-                className="FormInput"
-              />
-              <div className="InputBeam" />
-            </div>
+              {/* Hidden FormSubmit Configuration */}
+              <input type="hidden" name="_subject" value={`New Message from ${formData.name}`} />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
 
-            <div className={`NexusInput ${focusedField === 'message' ? 'focused' : ''} ${errors.message ? 'error' : ''}`}>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                onFocus={() => setFocusedField('message')}
-                onBlur={() => setFocusedField(null)}
-                placeholder="YOUR MESSAGE"
-                rows="6"
-                className="FormTextArea"
-              ></textarea>
-              <div className="InputBeam" />
-            </div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`PremiumButton group clickable ${isLoading ? 'opacity-70 pointer-events-none' : ''}`}
+                style={{ padding: '1rem 3rem', width: 'fit-content' }}
+              >
+                <span className="ButtonGlow"></span>
+                <span className="ButtonText">
+                  {isLoading ? 'SENDING...' : (status === 'success' ? 'SENT!' : 'SEND MESSAGE')}
+                </span>
+                <span className="ButtonIcon">
+                  <FaPaperPlane className={status === 'success' || isLoading ? 'IconBounce' : ''} />
+                </span>
+              </button>
 
-            {/* Hidden FormSubmit Configuration */}
-            <input type="hidden" name="_subject" value={`New Message from ${formData.name}`} />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`PremiumButton group clickable ${isLoading ? 'opacity-70 pointer-events-none' : ''}`}
-              style={{ padding: '1rem 3rem', width: 'fit-content' }}
-            >
-              <span className="ButtonGlow"></span>
-              <span className="ButtonText">
-                {isLoading ? 'SENDING...' : (status === 'success' ? 'SENT!' : 'SEND MESSAGE')}
-              </span>
-              <span className="ButtonIcon">
-                <FaPaperPlane className={status === 'success' || isLoading ? 'IconBounce' : ''} />
-              </span>
-            </button>
-
-            <AnimatePresence>
-              {status && (
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className={`StatusMessage ${status === 'success' ? 'SuccessText' : 'ErrorText'}`}
-                >
-                  {status === 'success' && "Message sent successfully! I'll get back to you soon."}
-                  {status === 'validation-error' && "Please enter a valid email address."}
-                  {status === 'submission-error' && "Submission failed. Please try again."}
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </form>
-        </motion.div>
+              <AnimatePresence>
+                {status && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className={`StatusMessage ${status === 'success' ? 'SuccessText' : 'ErrorText'}`}
+                  >
+                    {status === 'success' && "Message sent successfully! I'll get back to you soon."}
+                    {status === 'validation-error' && "Please enter a valid email address."}
+                    {status === 'submission-error' && "Submission failed. Please try again."}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
