@@ -9,10 +9,10 @@ import Hero3D from './components/Hero3D';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import './index.css';
 
-const SectionScanlines = () => {
+const BackgroundEffects = () => {
   return (
-    <div className="GlobalScanlines">
-      <div className="ScanlineBeam" />
+    <div className="GlobalBackground">
+      <div className="AccentBeam" />
     </div>
   );
 };
@@ -60,13 +60,13 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <div className="PortfolioRoot">
-      <SectionScanlines />
-      <motion.div className="ScrollProgressBar" style={{ scaleX }} />
+    <div className="AppContainer">
+      <BackgroundEffects />
+      <motion.div className="ProgressBar" style={{ scaleX }} />
       <Hero3D currentPath={location.pathname} />
       <Topbar />
-      {isTransitioning && <div className="SceneTransition"></div>}
-      <main className="MainViewport">
+      {isTransitioning && <div className="PageTransition"></div>}
+      <main className="PageWrapper">
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

@@ -116,7 +116,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="GlassPanel"
+            className="GlassCard"
           >
             <h3 className="SidebarHeading">DON'T BE SHY !</h3>
             <p className="SidebarDesc">
@@ -167,11 +167,11 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="GlassPanel"
+            className="GlassCard"
           >
             <form onSubmit={handleSubmit} className="MessageForm">
               <div className="FormGrid">
-                <div className={`NexusInput ${focusedField === 'name' ? 'focused' : ''} ${errors.name ? 'error' : ''}`}>
+                <div className={`FormGroup ${focusedField === 'name' ? 'focused' : ''} ${errors.name ? 'error' : ''}`}>
                   <input
                     type="text"
                     name="name"
@@ -184,7 +184,7 @@ const Contact = () => {
                   />
                   <div className="InputBeam" />
                 </div>
-                <div className={`NexusInput ${focusedField === 'email' ? 'focused' : ''} ${errors.email ? 'error' : ''}`}>
+                <div className={`FormGroup ${focusedField === 'email' ? 'focused' : ''} ${errors.email ? 'error' : ''}`}>
                   <input
                     type="email"
                     name="email"
@@ -199,7 +199,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className={`NexusInput ${focusedField === 'subject' ? 'focused' : ''} ${errors.subject ? 'error' : ''}`}>
+              <div className={`FormGroup ${focusedField === 'subject' ? 'focused' : ''} ${errors.subject ? 'error' : ''}`}>
                 <input
                   type="text"
                   name="subject"
@@ -213,7 +213,7 @@ const Contact = () => {
                 <div className="InputBeam" />
               </div>
 
-              <div className={`NexusInput ${focusedField === 'message' ? 'focused' : ''} ${errors.message ? 'error' : ''}`}>
+              <div className={`FormGroup ${focusedField === 'message' ? 'focused' : ''} ${errors.message ? 'error' : ''}`}>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -235,7 +235,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`PremiumButton group clickable ${isLoading ? 'opacity-70 pointer-events-none' : ''}`}
+                className={`ButtonMain group clickable ${isLoading ? 'opacity-70 pointer-events-none' : ''}`}
                 style={{ padding: '1rem 3rem', width: 'fit-content' }}
               >
                 <span className="ButtonGlow"></span>

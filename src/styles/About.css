@@ -190,7 +190,7 @@
     color: #5eb85c;
 }
 
-/* Removed generic Download Btn CSS as it uses generic PremiumButton */
+/* Removed generic Download Btn CSS as it uses generic ButtonMain */
 
 /* Stats Column */
 .StatsCol {
@@ -627,7 +627,7 @@
     }
 }
 
-/* Nexus Workflow */
+/* Main Workflow */
 .WorkflowArea {
     padding: 2rem 0;
     position: relative;

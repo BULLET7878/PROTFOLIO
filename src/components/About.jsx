@@ -48,7 +48,7 @@ const SkillIcon = ({ label, iconName, color, index, activeChainIndex, onHover })
   );
 };
 
-const SkillsConstellation = ({ activeIndex }) => {
+const SkillLinks = ({ activeIndex }) => {
   const [positions, setPositions] = React.useState([]);
   const containerRef = React.useRef(null);
 
@@ -97,7 +97,7 @@ const SkillsConstellation = ({ activeIndex }) => {
                 key={`${i}-${j}`}
                 x1={p1.x} y1={p1.y}
                 x2={p2.x} y2={p2.y}
-                stroke={isActive ? "var(--nexus-accent)" : "rgba(255, 255, 255, 0.03)"}
+                stroke={isActive ? "var(--brand-accent)" : "rgba(255, 255, 255, 0.03)"}
                 strokeWidth={isActive ? 2 : 1}
                 strokeDasharray={isActive ? "none" : "4 4"}
                 initial={{ opacity: 0 }}
@@ -226,7 +226,7 @@ const About = () => {
               MY SKILLS
             </h3>
             <div className="SkillsGrid">
-              <SkillsConstellation activeIndex={activeChainIndex} />
+              <SkillLinks activeIndex={activeChainIndex} />
               {skillsData.map((skill, index) => (
                 <motion.div
                   key={skill.id}
@@ -251,7 +251,7 @@ const About = () => {
           {/* Separator */}
           <div className="PageSeparator"></div>
 
-          {/* Nexus Workflow */}
+          {/* Workflow Process */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -268,9 +268,9 @@ const About = () => {
                 <svg width="100%" height="100%" viewBox="0 0 800 1200" fill="none" preserveAspectRatio="none">
                   <defs>
                     <linearGradient id="pathGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="var(--nexus-accent)" />
+                      <stop offset="0%" stopColor="var(--brand-accent)" />
                       <stop offset="50%" stopColor="var(--secondary-color)" />
-                      <stop offset="100%" stopColor="var(--nexus-accent)" />
+                      <stop offset="100%" stopColor="var(--brand-accent)" />
                     </linearGradient>
                     <filter id="pathGlow" x="-20%" y="-20%" width="140%" height="140%">
                       <feGaussianBlur stdDeviation="10" result="blur" />
@@ -398,7 +398,7 @@ const About = () => {
           <div className="DownloadWrapper CenterBtn" style={{ marginBottom: '2rem' }}>
             <button
               onClick={handleDownloadCV}
-              className="PremiumButton group clickable"
+              className="ButtonMain group clickable"
               style={{ width: 'auto' }}
             >
               <span className="ButtonGlow"></span>

@@ -226,7 +226,7 @@ const Home = () => {
               </motion.p>
 
               <motion.div className="ActionBtnWrapper" variants={itemVariants}>
-                <MagneticButton to="/about" className="PremiumButton group clickable" whileTap={{ scale: 0.95 }}>
+                <MagneticButton to="/about" className="ButtonMain group clickable" whileTap={{ scale: 0.95 }}>
                   <span className="ButtonGlow"></span>
                   <span className="ButtonText">EXPLORE MORE</span>
                   <span className="ButtonIcon">→</span>
@@ -242,7 +242,7 @@ const Home = () => {
               >
                 <div className="BorderBeam" />
                 <motion.div
-                  className="AvatarImageWrapper GlassPanel"
+                  className="AvatarImageWrapper GlassCard"
                   animate={{ y: [-10, 10, -10] }}
                   transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
                 >
@@ -286,7 +286,7 @@ const Home = () => {
       <section className="HomeBioSection" ref={bioRef}>
         <div className="ContainerBox">
           <motion.div
-            className="BioContentCard GlassPanel"
+            className="BioContentCard GlassCard"
             style={{ opacity: bioOpacity, scale: bioScale }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -321,7 +321,7 @@ const Home = () => {
             {servicesData.map((service) => (
               <TiltCard key={service.id} className="ServiceCardWrapper">
                 <div
-                  className="ServiceCard GlassPanel"
+                  className="ServiceCard GlassCard"
                 >
                   <div className="ServiceIconBox">
                     {service.icon}
@@ -342,7 +342,7 @@ const Home = () => {
           <div className="StatsGrid">
             <TiltCard>
               <motion.div
-                className="StatCard GlassPanel"
+                className="StatCard GlassCard"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -362,7 +362,7 @@ const Home = () => {
 
             <TiltCard>
               <motion.div
-                className="StatCard GlassPanel"
+                className="StatCard GlassCard"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -400,7 +400,7 @@ const Home = () => {
             {projectsData.slice(0, 2).map((project, idx) => (
               <TiltCard key={project.id}>
                 <motion.div
-                  className="FeaturedProjectCard GlassPanel"
+                  className="FeaturedProjectCard GlassCard"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -434,7 +434,7 @@ const Home = () => {
       <section className="HomeCTASection">
         <div className="ContainerBox">
           <motion.div
-            className="CTAContent GlassPanel"
+            className="CTAContent GlassCard"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -444,7 +444,7 @@ const Home = () => {
             <p className="CTASubtext">I'm currently available for freelance work and open to new opportunities.</p>
 
             <div className="CTABtnWrapper">
-              <Link to="/contact" className="PremiumButton group clickable">
+              <Link to="/contact" className="ButtonMain group clickable">
                 {/* Adding motion wrapper for tap effect since this is a Link directly */}
                 <motion.div
                   style={{ display: 'flex', alignItems: 'center', gap: 'inherit', width: '100%' }}

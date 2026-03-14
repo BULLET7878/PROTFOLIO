@@ -68,7 +68,7 @@
     }
 }
 
-.NexusGlow {
+.BrandGlow {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -308,7 +308,7 @@ a.ItemValue:hover {
     }
 }
 
-.NexusInput {
+.FormGroup {
     position: relative;
     width: 100%;
 }
@@ -355,17 +355,17 @@ a.ItemValue:hover {
     z-index: 5;
 }
 
-.NexusInput.focused .InputBeam {
+.FormGroup.focused .InputBeam {
     transform: scaleX(1);
 }
 
-.NexusInput.error .FormInput,
-.NexusInput.error .FormTextArea {
+.FormGroup.error .FormInput,
+.FormGroup.error .FormTextArea {
     border-color: #ef4444 !important;
     background: rgba(239, 68, 68, 0.05) !important;
 }
 
-.NexusInput.error .InputBeam {
+.FormGroup.error .InputBeam {
     background: #ef4444;
     transform: scaleX(1);
 }
@@ -383,7 +383,7 @@ a.ItemValue:hover {
     background: rgba(255, 255, 255, 0.02);
 }
 
-/* Generic Submit Button removed for PremiumButton */
+/* Generic Submit Button removed for ButtonMain */
 
 .StatusMessage {
     margin-top: 1.5rem;

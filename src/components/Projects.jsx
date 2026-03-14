@@ -50,7 +50,7 @@ const KineticShape = ({ i, mouseX, mouseY }) => {
   );
 };
 
-const KineticGeometry = () => {
+const BackgroundShapes = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -98,7 +98,7 @@ const ProjectModal = ({ project, onClose }) => {
           initial={{ scale: 0.8, y: 50, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
           exit={{ scale: 0.8, y: 50, opacity: 0 }}
-          className="ModalContent GlassPanel"
+          className="ModalContent GlassCard"
           onClick={e => e.stopPropagation()}
         >
           {/* Close Button */}
@@ -149,7 +149,7 @@ const ProjectModal = ({ project, onClose }) => {
                   href={project.live}
                   target="_blank"
                   rel="noreferrer"
-                  className="LiveLink PremiumButton group clickable"
+                  className="LiveLink ButtonMain group clickable"
                   style={{ padding: '0.8rem 1.5rem' }}
                 >
                   <span className="ButtonGlow"></span>
@@ -159,7 +159,7 @@ const ProjectModal = ({ project, onClose }) => {
                   href={project.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="CodeLink PremiumButton group clickable"
+                  className="CodeLink ButtonMain group clickable"
                   style={{ padding: '0.8rem 1.5rem', background: 'transparent' }}
                 >
                   <span className="ButtonGlow"></span>
@@ -188,7 +188,7 @@ const ProjectCardItem = ({ project, index, onSelect }) => {
       className="ProjectGridItem"
     >
       <TiltCard
-        className="ProjectCard GlassPanel clickable"
+        className="ProjectCard GlassCard clickable"
         onClick={() => onSelect(project)}
       >
         <div className="ProjectMedia">
@@ -220,7 +220,7 @@ const Projects = () => {
 
   return (
     <section className="PortfolioPage" ref={containerRef}>
-      <KineticGeometry />
+      <BackgroundShapes />
 
       <div className="PortfolioContainer">
         <div className="PortfolioHeader">

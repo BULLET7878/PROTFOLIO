@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
-function QuantumMesh({ count = 400, color = "#00f3ff" }) {
+function ParticleMesh({ count = 400, color = "#00f3ff" }) {
     const pointsRef = useRef();
     const { mouse, viewport } = useThree();
 
@@ -79,7 +79,7 @@ const Hero3D = ({ currentPath = "/" }) => {
             <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 1.5]} frameloop="demand">
                 <ambientLight intensity={0.4} />
                 <pointLight position={[10, 10, 10]} intensity={1.5} color={config.color} />
-                <QuantumMesh color={config.color} />
+                <ParticleMesh color={config.color} />
 
                 {config.geo === "octa" || config.geo === "mixed" ? (
                     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
