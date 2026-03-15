@@ -98,10 +98,13 @@ const MagneticButton = ({ children, to, className }) => {
 };
 
 const Home = () => {
+  // Section Refs
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   const { scrollY } = useScroll();
   const opacityFade = useTransform(scrollY, [0, 300], [1, 0]);
-  const textScale = useTransform(scrollY, [0, 500], [1, 1.1]);
-  const textY = useTransform(scrollY, [0, 500], [0, 50]);
+  const textScale = useTransform(scrollY, [0, 500], [1, isMobile ? 1 : 1.1]);
+  const textY = useTransform(scrollY, [0, 500], [0, isMobile ? 0 : 50]);
 
   // Section Refs
   const heroRef = useRef(null);

@@ -143,7 +143,6 @@ section {
   position: relative;
   transform-style: preserve-3d;
   z-index: 1;
-  will-change: transform;
 }
 
 /* 3D Section Stacking Effect - Refined */

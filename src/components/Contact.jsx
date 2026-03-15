@@ -76,20 +76,25 @@ const Contact = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          _subject: formData.subject,
+          subject: formData.subject, // FormSubmit uses subject or _subject
+          _subject: `New Message from ${formData.name}: ${formData.subject}`,
           message: formData.message,
-          _template: 'table'
+          _template: 'table',
+          _captcha: 'false' // Disable captcha for AJAX
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success === "true") {
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
+        console.error('Submission failed:', result);
         setStatus('submission-error');
       }
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error('Network error:', error);
       setStatus('submission-error');
     } finally {
       setIsLoading(false);

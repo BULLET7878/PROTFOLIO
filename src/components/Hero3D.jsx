@@ -58,6 +58,8 @@ function ParticleMesh({ count = 400, color = "#00f3ff" }) {
 }
 
 const Hero3D = ({ currentPath = "/" }) => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
     const config = useMemo(() => {
         // Map path to variant
         if (currentPath === "/contact") return { color: "#bc13fe", secondary: "#00f3ff", geo: "torus" };
@@ -76,12 +78,17 @@ const Hero3D = ({ currentPath = "/" }) => {
             pointerEvents: 'none',
             overflow: 'hidden'
         }}>
-            <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 1.5]} frameloop="demand">
+            <Canvas 
+                camera={{ position: [0, 0, 5], fov: 75 }} 
+                dpr={isMobile ? [1, 1] : [1, 1.5]} 
+                frameloop="demand"
+                performance={{ min: 0.5 }}
+            >
                 <ambientLight intensity={0.4} />
                 <pointLight position={[10, 10, 10]} intensity={1.5} color={config.color} />
-                <ParticleMesh color={config.color} />
+                <ParticleMesh count={isMobile ? 150 : 400} color={config.color} />
 
-                {config.geo === "octa" || config.geo === "mixed" ? (
+                {!isMobile && (config.geo === "octa" || config.geo === "mixed") ? (
                     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
                         <mesh position={[2, 1, -2]}>
                             <octahedronGeometry args={[1.2, 0]} />
@@ -90,7 +97,7 @@ const Hero3D = ({ currentPath = "/" }) => {
                     </Float>
                 ) : null}
 
-                {config.geo === "torus" || config.geo === "mixed" ? (
+                {!isMobile && (config.geo === "torus" || config.geo === "mixed") ? (
                     <Float speed={3} rotationIntensity={1} floatIntensity={1}>
                         <mesh position={[-3, -2, -1]}>
                             <torusGeometry args={[1, 0.3, 16, 100]} />
