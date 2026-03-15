@@ -48,20 +48,21 @@ const Topbar = () => {
                             const active = isActive(item.path);
 
                             return (
-                                <Link
-                                    key={index}
-                                    to={item.path}
-                                    className={`TopNavLink ${active ? 'Active' : ''}`}
-                                >
-                                    <Icon className="NavIcon" />
-                                    <span className="NavLabel">{item.label}</span>
-                                    {active && (
-                                        <motion.div
-                                            layoutId="activeTabIndicator"
-                                            className="ActiveIndicator"
-                                        />
-                                    )}
-                                </Link>
+                                    <Link
+                                        key={index}
+                                        to={item.path}
+                                        className={`TopNavLink ${active ? 'Active' : ''}`}
+                                        aria-label={`Navigate to ${item.label}`}
+                                    >
+                                        <Icon className="NavIcon" />
+                                        <span className="NavLabel">{item.label}</span>
+                                        {active && (
+                                            <motion.div
+                                                layoutId="activeTabIndicator"
+                                                className="ActiveIndicator"
+                                            />
+                                        )}
+                                    </Link>
                             );
                         })}
                     </nav>

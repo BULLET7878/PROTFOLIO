@@ -1,0 +1,52 @@
+.CustomCursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.CursorInner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: var(--primary-accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.CursorOuter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--primary-accent);
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: transform 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+}
+
+.CustomCursor.Hovering .CursorInner {
+    width: 4px;
+    height: 4px;
+}
+
+.CustomCursor.Hovering .CursorOuter {
+    transform: scale(2);
+    background: var(--primary-accent);
+    opacity: 0.15;
+}
+
+@media (max-width: 1024px) {
+    .CustomCursor {
+        display: none;
+    }
+}

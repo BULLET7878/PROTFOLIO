@@ -6,6 +6,7 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Hero3D from './components/Hero3D';
+import CustomCursor from './components/CustomCursor';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import './index.css';
 
