@@ -1,6 +1,16 @@
 export const projects = [
   {
     id: 1,
+    title: 'SmartHire AI',
+    description: 'An advanced AI-powered recruitment platform that streamlines the hiring process with intelligent candidate matching, automated resume screening, and predictive analytics. Built for modern HR teams.',
+    image: '/projects/smarthire_ai_mockup.png',
+    technologies: ['Next.js', 'Tailwind CSS', 'Gemini AI', 'Supabase'],
+    github: 'https://github.com/BULLET7878/SmartHire-AI',
+    live: 'https://smart-hire-ai-lyart.vercel.app/',
+    category: 'Full Stack AI'
+  },
+  {
+    id: 2,
     title: 'Mines Strike',
     description: 'A high-stakes, interactive gaming experience with real-time risk assessment and dynamic probability logic. Features a sleek, responsive UI with smooth motion effects.',
     image: '/projects/mines_strike.png',
@@ -8,16 +18,6 @@ export const projects = [
     github: 'https://github.com/BULLET7878',
     live: 'https://finalmines.vercel.app/',
     category: 'Web Game'
-  },
-  {
-    id: 2,
-    title: 'Precision Calculator',
-    description: 'A minimalist and highly efficient web-based calculator. Designed for speed and accuracy with a clean, distraction-free user interface.',
-    image: '/projects/calculator.png',
-    technologies: ['HTML', 'CSS', 'JavaScript', 'Netlify'],
-    github: 'https://github.com/BULLET7878/Calculator',
-    live: 'https://calculatorsimple07.netlify.app/',
-    category: 'Utility Tool'
   },
   {
     id: 3,
