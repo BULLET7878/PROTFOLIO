@@ -283,17 +283,18 @@ a.ItemValue:hover {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    background: rgba(15, 15, 25, 0.9);
-    border: 1px solid var(--glass-border-light);
+    background: rgba(8, 8, 20, 0.8);
+    border: 1px solid rgba(255,255,255,0.08);
     padding: 2.25rem;
     border-radius: 24px;
-    box-shadow: var(--glass-shadow);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.05) inset;
+    backdrop-filter: blur(24px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .MessageForm:focus-within {
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+    border-color: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0, 243, 255, 0.08);
 }
 
 .FormGrid {
@@ -316,21 +317,30 @@ a.ItemValue:hover {
 .FormInput,
 .FormTextArea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255,255,255,0.08);
     color: var(--text-main);
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.4rem;
     border-radius: 12px;
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: 14px;
     outline: none;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .FormInput::placeholder,
 .FormTextArea::placeholder {
-    color: var(--text-faint);
-    letter-spacing: 1px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1.5px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.FormInput:focus,
+.FormTextArea:focus {
+    background: rgba(0, 243, 255, 0.04) !important;
+    border-color: rgba(0, 243, 255, 0.25);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.08);
 }
 
 .FormInput {
@@ -368,12 +378,6 @@ a.ItemValue:hover {
 .FormGroup.error .InputBeam {
     background: #ef4444;
     transform: scaleX(1);
-}
-
-.FormInput:focus,
-.FormTextArea:focus {
-    background: rgba(0, 243, 255, 0.03) !important;
-    border-color: rgba(0, 243, 255, 0.3);
 }
 
 .FormInput:focus,

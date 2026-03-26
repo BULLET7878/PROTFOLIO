@@ -345,8 +345,8 @@
 .SkillBox {
     position: relative;
     padding: 1.5rem;
-    background: var(--glass-panel-bg);
-    border: 1px solid var(--glass-border-light);
+    background: rgba(10, 10, 22, 0.7);
+    border: 1px solid rgba(255,255,255,0.07);
     border-radius: 20px;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
@@ -354,6 +354,7 @@
     align-items: center;
     gap: 1rem;
     overflow: hidden;
+    backdrop-filter: blur(16px);
 }
 
 .SkillBox::before {
@@ -361,7 +362,7 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-            rgba(0, 243, 255, 0.1) 0%,
+            rgba(0, 243, 255, 0.08) 0%,
             transparent 60%);
     opacity: 0;
     transition: opacity 0.4s;
@@ -372,19 +373,32 @@
     opacity: 1;
 }
 
+.SkillBox:hover {
+    border-color: rgba(0, 243, 255, 0.18);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,243,255,0.06);
+    transform: translateY(-4px);
+}
+
 .SkillBox.chain-glow {
     border-color: rgba(0, 243, 255, 0.15);
 }
 
 /* Hardware Stats Dashboard */
 .StatCard {
-    background: rgba(10, 10, 20, 0.6);
-    border: 1px solid var(--glass-border-light);
+    background: rgba(8, 8, 20, 0.75);
+    border: 1px solid rgba(255,255,255,0.07);
     border-radius: 24px;
     padding: 2.5rem;
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(20px);
+    transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s;
+}
+
+.StatCard:hover {
+    border-color: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(0,243,255,0.08);
+    transform: translateY(-6px);
 }
 
 .StatCard::after {
@@ -523,17 +537,18 @@
 
 .TimelineContent {
     position: relative;
-    background: rgba(15, 15, 25, 0.9);
-    border: 1px solid var(--glass-border);
+    background: rgba(10, 10, 22, 0.75);
+    border: 1px solid rgba(255,255,255,0.07);
     border-radius: 20px;
     padding: 2rem;
-    transition: all 0.3s;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(16px);
 }
 
 .TimelineContent:hover {
     transform: translateX(10px);
-    border-color: rgba(0, 243, 255, 0.3);
-    box-shadow: var(--glass-shadow);
+    border-color: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,243,255,0.06);
 }
 
 .TimelineIconBox {
@@ -729,4 +744,27 @@
         justify-content: flex-start;
         text-align: left;
     }
+}
+
+/* Entry Title for Timeline */
+.EntryTitle {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+}
+
+/* Download wrapper */
+.DownloadWrapper {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.CenterBtn {
+    text-align: center;
 }

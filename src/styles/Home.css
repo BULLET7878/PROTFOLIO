@@ -58,12 +58,12 @@
 }
 
 .Headline {
-    font-size: 40px;
-    line-height: 1.1;
-    font-weight: 800;
+    font-size: 42px;
+    line-height: 1.05;
+    font-weight: 900;
     color: var(--text-main);
     margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
 }
 
 .ShimmerText {
@@ -110,17 +110,18 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.6rem 1.2rem;
-    background: rgba(0, 243, 255, 0.12);
-    border: 1px solid rgba(0, 243, 255, 0.3);
+    padding: 0.5rem 1.1rem;
+    background: rgba(0, 243, 255, 0.08);
+    border: 1px solid rgba(0, 243, 255, 0.2);
     border-radius: 100px;
     color: var(--primary-accent);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.15em;
-    margin-bottom: 2rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.75rem;
     text-transform: uppercase;
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.08), 0 1px 0 rgba(255,255,255,0.06) inset;
+    backdrop-filter: blur(8px);
 }
 
 .PulseDot {
@@ -190,19 +191,20 @@
     display: inline-flex;
     align-items: center;
     gap: 1rem;
-    padding: 1rem 2.5rem;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    padding: 0.9rem 2.2rem;
+    background: rgba(0, 243, 255, 0.06);
+    border: 1px solid rgba(0, 243, 255, 0.25);
     border-radius: 50px;
     color: var(--text-main);
     font-weight: 600;
     letter-spacing: 2px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(0, 243, 255, 0);
     pointer-events: auto;
     cursor: pointer;
     z-index: 100;
+    backdrop-filter: blur(10px);
 }
 
 .ButtonMain::before {
@@ -212,19 +214,32 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: all 0.6s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transition: all 0.5s;
 }
 
 .ButtonMain:hover {
     border-color: var(--primary-color);
-    box-shadow: var(--neon-glow);
+    box-shadow: var(--neon-glow), 0 12px 40px rgba(0, 0, 0, 0.5);
     transform: translateY(-3px);
-    background: rgba(0, 243, 255, 0.05);
+    background: rgba(0, 243, 255, 0.1);
 }
 
 .ButtonMain:hover::before {
     left: 100%;
+}
+
+.ButtonGlow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.15), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.ButtonMain:hover .ButtonGlow {
+    opacity: 1;
 }
 
 .ButtonText {
@@ -255,9 +270,10 @@
     width: 280px;
     height: 280px;
     padding: 10px;
-    background: rgba(10, 10, 15, 0.8);
-    border-radius: 40px;
-    border: 1px solid var(--glass-border-light);
+    background: rgba(8, 8, 18, 0.9);
+    border-radius: 36px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 60px rgba(0,243,255,0.05);
 }
 
 .BorderBeam {
@@ -509,13 +525,17 @@
 }
 
 .BioContentCard {
-    padding: 4rem;
-    border-radius: 30px;
+    padding: 3.5rem;
+    border-radius: 28px;
     text-align: center;
     max-width: 900px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    background: rgba(10, 10, 22, 0.7);
+    border: 1px solid rgba(255,255,255,0.07);
+    backdrop-filter: blur(24px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.06) inset;
 }
 
 .BioHeadline {
@@ -581,7 +601,7 @@
 }
 
 .ServiceCard {
-    padding: 3rem 2rem;
+    padding: 2.5rem 2rem;
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -590,6 +610,15 @@
     flex-direction: column;
     align-items: center;
     height: 100%;
+    background: rgba(12, 12, 24, 0.7);
+    border: 1px solid rgba(255,255,255,0.07);
+    backdrop-filter: blur(20px);
+    transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.ServiceCard:hover {
+    border-color: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0,243,255,0.08);
 }
 
 .ServiceIconBox {
@@ -825,7 +854,7 @@
 
 .CTAContent {
     padding: 4rem 2.5rem;
-    border-radius: 40px;
+    border-radius: 32px;
     text-align: center;
     max-width: 1000px;
     margin: 0 auto;
@@ -835,6 +864,10 @@
     gap: 2rem;
     position: relative;
     overflow: hidden;
+    background: rgba(10, 10, 22, 0.7);
+    border: 1px solid rgba(255,255,255,0.07);
+    backdrop-filter: blur(24px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.06) inset;
 }
 
 .CTAHeadline {

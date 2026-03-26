@@ -4,30 +4,33 @@
 
   --primary-color: #00f3ff;
   --secondary-color: #bc13fe;
-  --bg-color: #0c0c1a;
-  --bg-deep: #080812;
-  --text-main: #ffffff;
-  --text-dim: #a4b3c8;
-  --text-faint: rgba(255, 255, 255, 0.2);
-  --border-color: rgba(255, 255, 255, 0.04);
+  --bg-color: #07071a;
+  --bg-deep: #05050f;
+  --text-main: #f0f4ff;
+  --text-dim: #8899b4;
+  --text-faint: rgba(255, 255, 255, 0.18);
+  --border-color: rgba(255, 255, 255, 0.05);
 
-  /* Premium Glassmorphism */
-  --glass-bg: rgba(30, 30, 45, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-  --neon-glow: 0 0 20px rgba(0, 243, 255, 0.25);
+  /* Premium Glassmorphism — deeper, more refined */
+  --glass-bg: rgba(18, 18, 36, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255,255,255,0.06) inset;
+  --neon-glow: 0 0 30px rgba(0, 243, 255, 0.3), 0 0 60px rgba(0, 243, 255, 0.1);
 
-  --sidebar-bg: rgba(10, 10, 15, 0.8);
-  --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+  --sidebar-bg: rgba(8, 8, 18, 0.9);
+  --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.9);
   --transition-speed: 0.4s;
-  --dot-color: rgba(255, 255, 255, 0.03);
+  --dot-color: rgba(255, 255, 255, 0.025);
 
   /* Theme Design System */
-  --accent-glow: 0 0 25px rgba(0, 243, 255, 0.2);
-  --glass-border-light: rgba(255, 255, 255, 0.1);
-  --glass-panel-bg: rgba(20, 20, 35, 0.5);
+  --accent-glow: 0 0 30px rgba(0, 243, 255, 0.25);
+  --glass-border-light: rgba(255, 255, 255, 0.08);
+  --glass-panel-bg: rgba(14, 14, 28, 0.6);
   --primary-accent: #00f3ff;
   --secondary-accent: #bc13fe;
+
+  /* New: subtle noise texture via CSS */
+  --noise-opacity: 0.025;
 }
 
 * {
@@ -42,8 +45,11 @@ body {
   color: var(--text-main);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   transition: background-color var(--transition-speed), color var(--transition-speed);
+  /* Subtle noise grain for depth */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -99,10 +105,10 @@ img {
   flex-direction: column;
   background: var(--bg-deep);
   background-image:
-    radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(188, 19, 254, 0.08) 0%, transparent 40%),
-    radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 0);
-  background-size: 100% 100%, 100% 100%, 40px 40px;
+    radial-gradient(ellipse 80% 50% at 10% 10%, rgba(0, 243, 255, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 90% 90%, rgba(188, 19, 254, 0.07) 0%, transparent 60%),
+    radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 0);
+  background-size: 100% 100%, 100% 100%, 44px 44px;
   background-attachment: fixed;
   transition: background-color var(--transition-speed);
 }
@@ -123,11 +129,18 @@ img {
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent), var(--primary-accent));
+  background-size: 200% 100%;
+  animation: progressShimmer 3s linear infinite;
   z-index: 10000;
   transform-origin: 0%;
-  box-shadow: 0 0 10px var(--primary-accent);
+  box-shadow: 0 0 12px var(--primary-accent), 0 0 24px rgba(0,243,255,0.3);
+}
+
+@keyframes progressShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
 
@@ -152,25 +165,23 @@ section {
 .HomeFeaturedProjects,
 .HomeCTASection {
   background: var(--bg-deep);
-  box-shadow: 0 -30px 60px -10px rgba(0, 0, 0, 0.4);
-  margin-top: -5vh;
-  /* Reduced from -10vh to prevent overlap */
+  box-shadow: 0 -40px 80px -10px rgba(0, 0, 0, 0.6);
+  margin-top: -4vh;
   padding-top: 10vh !important;
-  /* Reduced from 15vh */
   position: relative;
   z-index: 1;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.025);
 }
 
-/* Add "diff" variety to alternating sections */
+/* Subtle gradient variety on alternating sections */
 section:nth-of-type(even) {
-  background: linear-gradient(to bottom, #0a0a0c, #0d0d12);
+  background: linear-gradient(to bottom, #080810, #0b0b14);
   perspective-origin: 60% 50%;
 }
 
 section:nth-of-type(odd) {
-  background: linear-gradient(to bottom, #0d0d12, #0a0a0c);
+  background: linear-gradient(to bottom, #0b0b14, #080810);
   perspective-origin: 40% 50%;
 }
 
@@ -186,6 +197,31 @@ section:nth-of-type(odd) {
   height: 100%;
   display: block;
   will-change: transform;
+}
+
+/* Global GlassCard utility */
+.GlassCard {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: var(--glass-shadow);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle top-edge highlight on glass cards */
+.GlassCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Page Transition Animation */
