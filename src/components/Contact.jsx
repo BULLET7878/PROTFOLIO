@@ -76,25 +76,27 @@ const Contact = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          subject: formData.subject, // FormSubmit uses subject or _subject
+          subject: formData.subject,
           _subject: `New Message from ${formData.name}: ${formData.subject}`,
           message: formData.message,
           _template: 'table',
-          _captcha: 'false' // Disable captcha for AJAX
+          _captcha: false // Disable captcha for AJAX (boolean false is recommended)
         }),
       });
 
       const result = await response.json();
+      console.log('FormSubmit Result:', result); // Log full result for debugging on Vercel
 
-      if (response.ok && result.success === "true") {
+      // Check for success string or boolean
+      if (response.ok && (result.success === "true" || result.success === true)) {
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        console.error('Submission failed:', result);
+        console.error('Submission failed with status:', response.status, result);
         setStatus('submission-error');
       }
     } catch (error) {
-      console.error('Network error:', error);
+      console.error('Network or fetch error:', error);
       setStatus('submission-error');
     } finally {
       setIsLoading(false);
@@ -232,10 +234,7 @@ const Contact = () => {
                 <div className="InputBeam" />
               </div>
 
-              {/* Hidden FormSubmit Configuration */}
-              <input type="hidden" name="_subject" value={`New Message from ${formData.name}`} />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_captcha" value="false" />
+
 
               <button
                 type="submit"
