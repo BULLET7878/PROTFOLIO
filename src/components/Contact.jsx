@@ -73,6 +73,7 @@ const Contact = () => {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
+        mode: 'cors',
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
@@ -80,17 +81,29 @@ const Contact = () => {
           _subject: `New Message from ${formData.name}: ${formData.subject}`,
           message: formData.message,
           _template: 'table',
-          _captcha: false // Disable captcha for AJAX (boolean false is recommended)
+          _captcha: "false", // Use string "false" as some setups prefer it
+          _honey: "" // Honeypot field for spam prevention
         }),
       });
 
-      const result = await response.json();
-      console.log('FormSubmit Result:', result); // Log full result for debugging on Vercel
+      let result;
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        result = await response.json();
+      } else {
+        const text = await response.text();
+        result = { success: response.ok, message: text };
+      }
 
-      // Check for success string or boolean
+      console.log('FormSubmit Status:', response.status);
+      console.log('FormSubmit Response:', result);
+
       if (response.ok && (result.success === "true" || result.success === true)) {
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
+      } else if (response.status === 403 || response.status === 401) {
+        // Special case for unverified domains or emails
+        setStatus('unverified-error');
       } else {
         console.error('Submission failed with status:', response.status, result);
         setStatus('submission-error');
@@ -261,7 +274,8 @@ const Contact = () => {
                   >
                     {status === 'success' && "Message sent successfully! I'll get back to you soon."}
                     {status === 'validation-error' && "Please enter a valid email address."}
-                    {status === 'submission-error' && "Submission failed. Please try again."}
+                    {status === 'unverified-error' && "Domain not verified. Please check your email inbox (and spam) for a FormSubmit activation link!"}
+                    {status === 'submission-error' && "Submission failed. Please try again or contact me directly via email."}
                   </motion.p>
                 )}
               </AnimatePresence>
