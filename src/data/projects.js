@@ -1,6 +1,17 @@
 export const projects = [
   {
     id: 1,
+    title: "StyleSync — Premium Fashion",
+    description:
+      "A full-stack premium fashion e-commerce marketplace with multi-vendor seller support, real-time inventory management, UPI payment gateway, Cloudinary image hosting, and Google OAuth authentication. Built for a seamless, luxury shopping experience.",
+    image: "/projects/stylesync_premium_fashion.png",
+    technologies: ["React", "Node.js", "MongoDB", "Express", "Cloudinary", "Vercel"],
+    github: "https://github.com/BULLET7878/Stylesync",
+    live: "https://stylesync-store.vercel.app",
+    category: "Full Stack E-Commerce",
+  },
+  {
+    id: 2,
     title: "SmartHire AI",
     description:
       "An advanced AI-powered recruitment platform that streamlines the hiring process with intelligent candidate matching, automated resume screening, and predictive analytics. Built for modern HR teams.",
@@ -11,7 +22,7 @@ export const projects = [
     category: "Full Stack AI",
   },
   {
-    id: 2,
+    id: 3,
     title: "Mines Strike",
     description:
       "A high-stakes, interactive gaming experience with real-time risk assessment and dynamic probability logic. Features a sleek, responsive UI with smooth motion effects.",
@@ -22,7 +33,7 @@ export const projects = [
     category: "Web Game",
   },
   {
-    id: 3,
+    id: 4,
     title: "Precision Calculator",
     description:
       "A minimalist and highly efficient web-based calculator. Designed for speed and accuracy with a clean, distraction-free user interface.",
@@ -33,7 +44,7 @@ export const projects = [
     category: "Utility Tool",
   },
   {
-    id: 4,
+    id: 5,
     title: "FitCheck Tracker",
     description:
       "A comprehensive fitness companion designed to track workouts, monitor progress, and help users achieve their health goals with a user-friendly interface.",
@@ -44,7 +55,7 @@ export const projects = [
     category: "Health & Fitness",
   },
   {
-    id: 5,
+    id: 6,
     title: "Renewable Energy Solutions",
     description:
       "A dedicated platform showcasing innovative renewable energy technologies and sustainable solutions. Focused on clean energy awareness and impact tracking.",
@@ -55,7 +66,7 @@ export const projects = [
     category: "Environment",
   },
   {
-    id: 6,
+    id: 7,
     title: "Professional Portfolio",
     description:
       "A custom-built, fully responsive portfolio website featuring a modern theme engine, high-performance CSS architecture, and seamless contact integration.",
