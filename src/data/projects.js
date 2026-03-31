@@ -55,7 +55,7 @@ export const projects = [
     category: "Utility Tool",
   },
   {
-    id: 5,
+    id: 6,
     title: "FitCheck Tracker",
     description:
       "A comprehensive fitness companion designed to track workouts, monitor progress, and help users achieve their health goals with a user-friendly interface.",
@@ -66,7 +66,7 @@ export const projects = [
     category: "Health & Fitness",
   },
   {
-    id: 6,
+    id: 7,
     title: "Renewable Energy Solutions",
     description:
       "A dedicated platform showcasing innovative renewable energy technologies and sustainable solutions. Focused on clean energy awareness and impact tracking.",
@@ -75,16 +75,5 @@ export const projects = [
     github: "https://github.com/Vikash9546/hunters",
     live: "https://renewable-energyyy.netlify.app/",
     category: "Environment",
-  },
-  {
-    id: 7,
-    title: "Professional Portfolio",
-    description:
-      "A custom-built, fully responsive portfolio website featuring a modern theme engine, high-performance CSS architecture, and seamless contact integration.",
-    image: "/projects/portfolio.png",
-    technologies: ["React", "Framer Motion", "Semantic CSS"],
-    github: "https://github.com/BULLET7878/PROTFOLIO",
-    live: "https://rahuldhakadportfolio.netlify.app/",
-    category: "Portfolio",
-  },
+  }
 ];
