@@ -23,6 +23,17 @@ export const projects = [
   },
   {
     id: 3,
+    title: "Professional Portfolio",
+    description:
+      "A custom-built, fully responsive portfolio website featuring a modern theme engine, high-performance CSS architecture, and seamless contact integration.",
+    image: "/projects/portfolio.png",
+    technologies: ["React", "Framer Motion", "Semantic CSS"],
+    github: "https://github.com/BULLET7878/PROTFOLIO",
+    live: "https://rahuldhakadportfolio.netlify.app/",
+    category: "Portfolio",
+  },
+  {
+    id: 4,
     title: "Mines Strike",
     description:
       "A high-stakes, interactive gaming experience with real-time risk assessment and dynamic probability logic. Features a sleek, responsive UI with smooth motion effects.",
@@ -33,7 +44,7 @@ export const projects = [
     category: "Web Game",
   },
   {
-    id: 4,
+    id: 5,
     title: "Precision Calculator",
     description:
       "A minimalist and highly efficient web-based calculator. Designed for speed and accuracy with a clean, distraction-free user interface.",
