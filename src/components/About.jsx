@@ -144,7 +144,7 @@ const About = () => {
     { label: 'Freelance', value: 'Available', isGreen: true },
     { label: 'Address', value: 'Kota, Rajasthan' },
     { label: 'Phone', value: '+91 90248 50689' },
-    { label: 'Email', value: 'rahul.dhakar@adypu.edu.in' },
+    { label: 'Email', value: 'rahuldhakarmm@gmail.com' },
     { label: 'Languages', value: 'Hindi, English' },
   ];
 
