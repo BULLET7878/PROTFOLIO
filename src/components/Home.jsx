@@ -158,7 +158,7 @@ const Home = () => {
   // ----- Typing Bio Section Logic -----
   const isBioInView = useInView(bioRef, { once: true, margin: "-100px" });
   const [typedText, setTypedText] = useState('');
-  const fullBioText = "I'm an India-based developer with a deep passion for crafting premium, futuristic user interfaces. Specializing in the MERN stack and modern animation libraries, I bridge the gap between stunning design and robust engineering.";
+  const fullBioText = "I'm a B.Tech student specializing in Artificial Intelligence with a strong interest in full-stack development. I've built real-world projects like a MERN-based e-commerce platform and an AI-powered recruitment system. I enjoy solving problems, building scalable applications, and continuously learning new technologies to create impactful solutions.";
 
   useEffect(() => {
     if (isBioInView) {

@@ -156,7 +156,7 @@ const Contact = () => {
                 <FaEnvelopeOpen className="ItemIcon mt-1" />
                 <div className="ItemBody">
                   <span className="ItemLabel">MAIL ME</span>
-                  <a href="mailto:rahuldhakarmm@gmail.com" className="ItemValue MailLink">rahuldhakarmm@gmail.com</a>
+                  <a href="mailto:rahul.dhakar@adypu.edu.in" className="ItemValue MailLink">rahul.dhakar@adypu.edu.in</a>
                 </div>
               </div>
 

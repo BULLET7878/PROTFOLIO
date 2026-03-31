@@ -140,11 +140,11 @@ const About = () => {
 
   const personalInfos = [
     { label: 'Name', value: 'Rahul Dhakad' },
-    { label: 'Age', value: '22 Years' },
+    { label: 'Age', value: '20 Years' },
     { label: 'Freelance', value: 'Available', isGreen: true },
     { label: 'Address', value: 'Kota, Rajasthan' },
     { label: 'Phone', value: '+91 90248 50689' },
-    { label: 'Email', value: 'rahuldhakarmm@gmail.com' },
+    { label: 'Email', value: 'rahul.dhakar@adypu.edu.in' },
     { label: 'Languages', value: 'Hindi, English' },
   ];
 
@@ -176,7 +176,7 @@ const About = () => {
             <div className="PersonalInfoCol">
               <h3 className="ColHeading">PERSONAL INFOS</h3>
               <p className="ColBio">
-                I'm a passionate Full Stack Developer specializing in the MERN stack. I focus on building clean, high-performance web applications and am always eager to learn and implement innovative solutions.
+                I'm a B.Tech student specializing in Artificial Intelligence with a strong interest in full-stack development. I've built real-world projects like a MERN-based e-commerce platform and an AI-powered recruitment system. I enjoy solving problems, building scalable applications, and continuously learning new technologies.
               </p>
               <div className="InfoDetailsGrid">
                 {personalInfos.map((info, idx) => (
@@ -355,16 +355,16 @@ const About = () => {
               {[
                 {
                   year: "2024 - PRESENT",
-                  title: "Bachelor of Technology",
-                  inst: "NEWTON SCHOOL OF TECHNOLOGY",
-                  desc: "Pursuing B.Tech with a focus on cutting-edge technologies and industry-ready skills.",
+                  title: "Bachelor of Technology (AI ML)",
+                  inst: "NEWTON SCHOOL OF TECHNOLOGY, PUNE",
+                  desc: "Pursuing B.Tech in Artificial Intelligence & Machine Learning. Current Grade: 7.3/10.0.",
                   icon: <FaGraduationCap className="TimelineIcon" />
                 },
                 {
-                  year: "2020 - 2022",
-                  title: "10th & 12th Education",
-                  inst: "JAWAHAR NAVODAYA VIDYALAYA KOTA",
-                  desc: "Completed secondary and higher secondary education with a focus on science and mathematics.",
+                  year: "2021 - 2022",
+                  title: "Intermediate (Class XII)",
+                  inst: "JAWAHAR NAVODAYA VIDYALAYA, KOTA",
+                  desc: "Completed higher secondary education with a focus on science and mathematics. Grade: 77.0%.",
                   icon: <FaGraduationCap className="TimelineIcon" />
                 }
               ].map((item, index) => (

@@ -33,22 +33,14 @@ export const skills = [
   },
   {
     id: 5,
-    name: 'Node.js',
+    name: 'Tailwind CSS',
     level: 90,
-    category: 'Backend',
-    icon: 'SiNodejs',
-    color: '#339933'
+    category: 'Frontend',
+    icon: 'SiTailwindcss',
+    color: '#06B6D4'
   },
   {
     id: 6,
-    name: 'Express.js',
-    level: 85,
-    category: 'Backend',
-    icon: 'SiExpress',
-    color: '#ffffff'
-  },
-  {
-    id: 7,
     name: 'Python',
     level: 80,
     category: 'Backend',
@@ -56,12 +48,20 @@ export const skills = [
     color: '#3776AB'
   },
   {
-    id: 8,
-    name: 'MySQL',
+    id: 7,
+    name: 'Node.js',
     level: 90,
-    category: 'Database',
-    icon: 'SiMysql',
-    color: '#4479A1'
+    category: 'Backend',
+    icon: 'SiNodedotjs',
+    color: '#339933'
+  },
+  {
+    id: 8,
+    name: 'Express.js',
+    level: 85,
+    category: 'Backend',
+    icon: 'SiExpress',
+    color: '#ffffff'
   },
   {
     id: 9,
@@ -73,6 +73,14 @@ export const skills = [
   },
   {
     id: 10,
+    name: 'MySQL',
+    level: 90,
+    category: 'Database',
+    icon: 'SiMysql',
+    color: '#4479A1'
+  },
+  {
+    id: 11,
     name: 'Git',
     level: 90,
     category: 'Tools',
@@ -80,11 +88,11 @@ export const skills = [
     color: '#F05032'
   },
   {
-    id: 11,
-    name: 'AWS',
-    level: 70,
-    category: 'Cloud',
-    icon: 'SiAmazonaws',
-    color: '#232F3E'
+    id: 12,
+    name: 'Docker',
+    level: 65,
+    category: 'Tools',
+    icon: 'SiDocker',
+    color: '#2496ED'
   }
 ];
