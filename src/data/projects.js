@@ -5,7 +5,14 @@ export const projects = [
     description:
       "A full-stack premium fashion e-commerce marketplace with multi-vendor seller support, real-time inventory management, UPI payment gateway, Cloudinary image hosting, and Google OAuth authentication. Built for a seamless, luxury shopping experience.",
     image: "/projects/stylesync_premium_fashion.png",
-    technologies: ["React", "Node.js", "MongoDB", "Express", "Cloudinary", "Vercel"],
+    technologies: [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Express",
+      "Cloudinary",
+      "Vercel",
+    ],
     github: "https://github.com/BULLET7878/Stylesync",
     live: "https://stylesync-store.vercel.app",
     category: "Full Stack E-Commerce",
@@ -75,5 +82,23 @@ export const projects = [
     github: "https://github.com/Vikash9546/hunters",
     live: "https://renewable-energyyy.netlify.app/",
     category: "Environment",
-  }
+  },
+  {
+    id: 8,
+    title: "Influencer Search Dashboard (Wobb Assignment)",
+    description:
+      "A modern, fully responsive influencer discovery dashboard built as part of Wobb's frontend engineering assignment. Refactored the application by replacing React Context with Zustand, redesigned the UI/UX, implemented persistent profile selection with local storage, optimized performance, improved code quality, and enhanced accessibility using React, TypeScript, and Tailwind CSS.",
+    image: "/projects/wobb.png",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Zustand",
+      "React Router",
+    ],
+    github: "https://github.com/BULLET7878/Wobb",
+    live: "https://wobb-phi.vercel.app/",
+    category: "Frontend",
+  },
 ];
