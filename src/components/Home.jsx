@@ -375,7 +375,7 @@ const Home = () => {
                   <FiLayers />
                 </div>
                 <h3 className="StatNumber">
-                  <ModernCounter value={7} />
+                  <ModernCounter value={10} />
                   <span className="StatPlus">+</span>
                 </h3>
                 <p className="StatTitle">PROJECTS COMPLETED</p>
