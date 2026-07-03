@@ -150,7 +150,7 @@ const About = () => {
 
   const stats = [
     { number: '2+', text: 'YEARS OF EXPERIENCE' },
-    { number: '7+', text: 'PROJECTS COMPLETED' }
+    { number: '10+', text: 'PROJECTS COMPLETED' }
   ];
 
   return (
